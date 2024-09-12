@@ -5,35 +5,37 @@ import { provideClientHydration } from '@angular/platform-browser';
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
-// Import Material modules using provide functions
-import { provideMatButton } from '@angular/material/button';
-import { provideMatCard } from '@angular/material/card';
-import { provideMatFormField } from '@angular/material/form-field';
-import { provideMatInput } from '@angular/material/input';
-import { provideMatDialog } from '@angular/material/dialog';
-import { provideMatSnackBar } from '@angular/material/snack-bar';
+// Import Material modules
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
-// Note: FormsModule is not typically provided in app.config.ts, 
-// but can be imported in component modules where needed
+// Import provideAnimations instead of provideAnimationsAsync if you encounter issues
+// import { provideAnimations } from '@angular/platform-browser/animations';
+
+import { importProvidersFrom } from '@angular/core';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    // Configures Zone.js change detection with event coalescing for better performance
     provideZoneChangeDetection({ eventCoalescing: true }),
-    // Sets up the router with the defined routes
     provideRouter(routes),
-    // Enables client-side hydration for server-side rendered applications
     provideClientHydration(),
-    // Provides the HttpClient for making HTTP requests throughout the application
     provideHttpClient(),
-    // Provides animations
     provideAnimationsAsync(),
+    // If you have issues with animations, use this instead:
+    // provideAnimations(),
+
     // Provide Material modules
-    provideMatButton(),
-    provideMatCard(),
-    provideMatFormField(),
-    provideMatInput(),
-    provideMatDialog(),
-    provideMatSnackBar()
+    importProvidersFrom(
+      MatButtonModule,
+      MatCardModule,
+      MatFormFieldModule,
+      MatInputModule,
+      MatDialogModule,
+      MatSnackBarModule
+    )
   ]
 };

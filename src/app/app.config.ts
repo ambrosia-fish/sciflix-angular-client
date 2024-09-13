@@ -30,7 +30,7 @@ export const appConfig: ApplicationConfig = {
       MatInputModule,
       MatDialogModule,
       MatSnackBarModule
-    )
+    ), provideAnimationsAsync()
   ]
 };
 

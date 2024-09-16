@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { FetchApiDataService } from '../services/fetch-api-data.service';
 import { GenreDialogComponent } from '../genre-dialog/genre-dialog.component';
 import { DirectorDialogComponent } from '../director-dialog/director-dialog.component';
+import { SynopsisDialogComponent } from '../synopsis-dialog/synopsis-dialog.component';
 
 @Component({
   selector: 'app-movie-card',
@@ -60,6 +61,21 @@ export class MovieCardComponent implements OnInit {
       });
     } else {
       console.error(`Director ${directorName} not found`);
+    }
+  }
+
+  openSynopsisDialog(movieTitle: string): void {
+    const movie = this.movies.find(movie => movie.Title === movieTitle);
+    if (movie) {
+      this.dialog.open(SynopsisDialogComponent, {
+        width: '400px',
+        data: { 
+          title: movie.Title,
+          synopsis: movie.Description 
+        }
+      });
+    } else {
+      console.error(`Movie not found: ${movieTitle}`);
     }
   }
 }

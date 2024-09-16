@@ -1,11 +1,11 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withPreloading, PreloadAllModules } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { provideClientHydration } from '@angular/platform-browser';
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
-// Import Material modules
+import { importProvidersFrom } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -13,22 +13,16 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
-// Import provideAnimations instead of provideAnimationsAsync if you encounter issues
-// import { provideAnimations } from '@angular/platform-browser/animations';
-
-import { importProvidersFrom } from '@angular/core';
+console.log('app.config.ts is being loaded');
+console.log('Imported routes:', routes);
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes),
+    provideRouter(routes, withPreloading(PreloadAllModules)),
     provideClientHydration(),
     provideHttpClient(),
     provideAnimationsAsync(),
-    // If you have issues with animations, use this instead:
-    // provideAnimations(),
-
-    // Provide Material modules
     importProvidersFrom(
       MatButtonModule,
       MatCardModule,
@@ -36,6 +30,8 @@ export const appConfig: ApplicationConfig = {
       MatInputModule,
       MatDialogModule,
       MatSnackBarModule
-    )
+    ), provideAnimationsAsync()
   ]
 };
+
+console.log('appConfig:', appConfig);

@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-login-form',
@@ -26,6 +27,7 @@ export class UserLoginFormComponent {
   private fetchApiData = inject(FetchApiDataService);
   private dialogRef = inject(MatDialogRef<UserLoginFormComponent>);
   private snackBar = inject(MatSnackBar);
+  private router = inject(Router);
 
   loginUser(): void {
     this.fetchApiData.userLogin(this.userData).subscribe({
@@ -38,8 +40,8 @@ export class UserLoginFormComponent {
         this.snackBar.open('Login successful', 'OK', {
           duration: 2000
         });
-        // Note: If you want to navigate after login, you'll need to inject and use Router
-        // this.router.navigate(['movies']);
+        // Navigate to movies page after successful login
+        this.router.navigate(['movies']);
       },
       error: (error) => {
         console.error('Login error', error);

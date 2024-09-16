@@ -1,6 +1,7 @@
 {
   "name": "sci-flix-angular-client",
   "version": "0.0.0",
+  "homepage": "https://ambrosia-fish.github.io/sci-flix-angular-client",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

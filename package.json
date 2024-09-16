@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --base-ref=/sci-flix-angular-client/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:sci-flix-angular-client": "node dist/sci-flix-angular-client/server/server.mjs"

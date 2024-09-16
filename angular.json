@@ -26,10 +26,14 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
+              "src/favicon.ico",
+              "src/assets",
               {
                 "glob": "**/*",
-                "input": "public"
-              }
+                "input": "public",
+                "output": "/"
+              },
+              "src/.nojekyll"
             ],
             "styles": [
               "@angular/material/prebuilt-themes/azure-blue.css",
@@ -104,7 +108,12 @@
           }
         },
         "deploy": {
-          "builder": "angular-cli-ghpages:deploy"
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {
+            "baseHref": "/sci-flix-angular-client/",
+            "name": "Your Name",
+            "email": "your.email@example.com"
+          }
         }
       }
     }

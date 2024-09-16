@@ -18,6 +18,8 @@ import { SynopsisDialogComponent } from '../synopsis-dialog/synopsis-dialog.comp
 })
 export class MovieCardComponent implements OnInit {
   movies: any[] = [];
+  favorites: string[] = [];
+  username: string | null = null;
 
   constructor(
     private fetchApiData: FetchApiDataService,
@@ -26,13 +28,20 @@ export class MovieCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getMovies();
+    this.getUsernameFromStorage();
+    this.getFavorites();
+  }
+
+  getUsernameFromStorage(): void {
+    const userString = localStorage.getItem('user');
+    const user = userString ? JSON.parse(userString) : null;
+    this.username = user ? user.username : null;
   }
 
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe({
       next: (resp: any) => {
         this.movies = resp;
-        console.log(this.movies);
       },
       error: (error) => {
         console.error('Error fetching movies:', error);
@@ -40,42 +49,89 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
-  openGenreDialog(genreName: string): void {
-    const genre = this.movies.find(movie => movie.Genre.Name === genreName)?.Genre;
-    if (genre) {
-      this.dialog.open(GenreDialogComponent, {
-        width: '250px',
-        data: { Name: genre.Name, Description: genre.Description }
+  getFavorites(): void {
+    if (this.username) {
+      this.fetchApiData.getUser(this.username).subscribe({
+        next: (user: any) => {
+          this.favorites = user.favoriteMovies;
+        },
+        error: (error) => {
+          console.error('Error fetching favorites:', error);
+        }
       });
-    } else {
-      console.error(`Genre ${genreName} not found`);
     }
   }
 
-  openDirectorDialog(directorName: string): void {
-    const director = this.movies.find(movie => movie.Director.Name === directorName)?.Director;
-    if (director) {
-      this.dialog.open(DirectorDialogComponent, {
-        width: '250px',
-        data: { Name: director.Name, Bio: director.Bio }
-      });
-    } else {
-      console.error(`Director ${directorName} not found`);
-    }
+  isFavorite(movieId: string): boolean {
+    return this.favorites.includes(movieId);
   }
 
-  openSynopsisDialog(movieTitle: string): void {
-    const movie = this.movies.find(movie => movie.Title === movieTitle);
-    if (movie) {
-      this.dialog.open(SynopsisDialogComponent, {
-        width: '400px',
-        data: { 
-          title: movie.Title,
-          synopsis: movie.Description 
+  toggleFavorite(movieId: string): void {
+    if (this.username) {
+      this.fetchApiData.addRemoveFavoriteMovie(this.username, movieId).subscribe({
+        next: (resp: any) => {
+          if (resp.FavoriteMovies) {
+            this.favorites = resp.FavoriteMovies;
+          } else {
+            const index = this.favorites.indexOf(movieId);
+            if (index === -1) {
+              this.favorites.push(movieId);
+            } else {
+              this.favorites.splice(index, 1);
+            }
+          }
+        },
+        error: (error) => {
+          console.error('Error toggling favorite:', error);
         }
       });
     } else {
-      console.error(`Movie not found: ${movieTitle}`);
+      console.error('Username not found in storage');
     }
+  }
+
+  openGenreDialog(genreName: string): void {
+    this.fetchApiData.getGenre(genreName).subscribe({
+      next: (genre: any) => {
+        this.dialog.open(GenreDialogComponent, {
+          width: '250px',
+          data: { Name: genreName, Description: genre.genreDescription }
+        });
+      },
+      error: (error) => {
+        console.error(`Error fetching genre ${genreName}:`, error);
+      }
+    });
+  }
+
+  openDirectorDialog(directorName: string): void {
+    this.fetchApiData.getDirector(directorName).subscribe({
+      next: (director: any) => {
+        this.dialog.open(DirectorDialogComponent, {
+          width: '250px',
+          data: director
+        });
+      },
+      error: (error) => {
+        console.error(`Error fetching director ${directorName}:`, error);
+      }
+    });
+  }
+
+  openSynopsisDialog(movieTitle: string): void {
+    this.fetchApiData.getOneMovie(movieTitle).subscribe({
+      next: (movie: any) => {
+        this.dialog.open(SynopsisDialogComponent, {
+          width: '400px',
+          data: {
+            title: movie.Title,
+            synopsis: movie.Description
+          }
+        });
+      },
+      error: (error) => {
+        console.error(`Error fetching movie ${movieTitle}:`, error);
+      }
+    });
   }
 }

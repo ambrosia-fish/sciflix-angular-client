@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { FetchApiDataService } from '../services/fetch-api-data.service';
 import { GenreDialogComponent } from '../genre-dialog/genre-dialog.component';
+import { DirectorDialogComponent } from '../director-dialog/director-dialog.component';
 
 @Component({
   selector: 'app-movie-card',
@@ -37,6 +38,7 @@ export class MovieCardComponent implements OnInit {
       }
     });
   }
+
   openGenreDialog(genreName: string): void {
     const genre = this.movies.find(movie => movie.Genre.Name === genreName)?.Genre;
     if (genre) {
@@ -46,6 +48,18 @@ export class MovieCardComponent implements OnInit {
       });
     } else {
       console.error(`Genre ${genreName} not found`);
+    }
+  }
+
+  openDirectorDialog(directorName: string): void {
+    const director = this.movies.find(movie => movie.Director.Name === directorName)?.Director;
+    if (director) {
+      this.dialog.open(DirectorDialogComponent, {
+        width: '250px',
+        data: { Name: director.Name, Bio: director.Bio }
+      });
+    } else {
+      console.error(`Director ${directorName} not found`);
     }
   }
 }

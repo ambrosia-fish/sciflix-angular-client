@@ -6,7 +6,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --base-href /sciflix-angular-client/",
-    "deploy": "npx gh-pages -d dist/sciflix-angular-client/browser",
+    "deploy": "npx gh-pages -d docs/sciflix-angular-client/browser",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:sci-flix-angular-client": "node dist/sci-flix-angular-client/server/server.mjs",

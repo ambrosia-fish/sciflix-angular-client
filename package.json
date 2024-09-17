@@ -6,7 +6,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --base-href=/sci-flix-angular-client/",
-    "deploy": "ng build --configuration production --base-href=/sci-flix-angular-client/",
+    "deploy": "ng build --configuration production --base-href=/sciflix-angular-client/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:sci-flix-angular-client": "node dist/sci-flix-angular-client/server/server.mjs",

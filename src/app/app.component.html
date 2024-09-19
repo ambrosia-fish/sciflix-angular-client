@@ -1,1 +1,4 @@
+<ng-container *ngIf="(authService.isLoggedIn$ | async) as isLoggedIn">
+  <app-navigation-bar *ngIf="isLoggedIn && !isWelcomePage" [isLoggedIn]="isLoggedIn" (logout)="authService.logout()"></app-navigation-bar>
+</ng-container>
 <router-outlet></router-outlet>

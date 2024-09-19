@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { UserLoginFormComponent } from '../user-login-form/user-login-form.component';
@@ -12,6 +12,8 @@ import { UserRegistrationFormComponent } from '../user-registration-form/user-re
   styleUrls: ['./welcome-page.component.scss']
 })
 export class WelcomePageComponent {
+  @Output() loginSuccess = new EventEmitter<void>();
+
   constructor(public dialog: MatDialog) { }
 
   openUserRegistrationDialog(): void {
@@ -21,8 +23,13 @@ export class WelcomePageComponent {
   }
 
   openUserLoginDialog(): void {
-    this.dialog.open(UserLoginFormComponent, {
+    const dialogRef = this.dialog.open(UserLoginFormComponent, {
       width: '280px'
+    });
+
+    dialogRef.componentInstance.loginSuccess.subscribe(() => {
+      this.loginSuccess.emit();
+      dialogRef.close();
     });
   }
 }

@@ -20,7 +20,7 @@
             "outputPath": "docs",
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "baseHref": "/",
+            "baseHref": "/sciflix-angular-client/",
             "polyfills": [
               "zone.js"
             ],

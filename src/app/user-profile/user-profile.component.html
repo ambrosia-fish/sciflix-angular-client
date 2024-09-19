@@ -1,28 +1,36 @@
 <mat-card>
-    <mat-card-header>
-      <mat-card-title>User Profile</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <div *ngIf="!editMode">
-        <p>Username: {{ user.username }}</p>
-        <p>Email: {{ user.email }}</p>
-        <p>Birthday: {{ user.birthday | date }}</p>
-      </div>
-      <form *ngIf="editMode" (ngSubmit)="onSubmit()">
-        <mat-form-field>
-          <input matInput [(ngModel)]="updatedUser.username" name="username" placeholder="Username" required>
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput [(ngModel)]="updatedUser.email" name="email" placeholder="Email" required type="email">
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput [(ngModel)]="updatedUser.birthday" name="birthday" placeholder="Birthday" type="date">
-        </mat-form-field>
-        <button mat-raised-button color="primary" type="submit">Save Changes</button>
-      </form>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-button (click)="toggleEditMode()">{{ editMode ? 'Cancel' : 'Edit Profile' }}</button>
-      <button mat-button color="warn" (click)="deleteAccount()">Delete Account</button>
-    </mat-card-actions>
-  </mat-card>
+  <mat-card-header>
+    <mat-card-title>User Profile</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div *ngIf="!editMode">
+      <p><strong>Username:</strong> {{user.username}}</p>
+      <p><strong>Email:</strong> {{user.email}}</p>
+      <p><strong>Birthday:</strong> {{user.birthday | date}}</p>
+    </div>
+
+    <form *ngIf="editMode" (ngSubmit)="onSubmit()">
+      <mat-form-field>
+        <input matInput [(ngModel)]="updatedUser.username" name="username" placeholder="Username" required>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [(ngModel)]="updatedUser.email" name="email" placeholder="Email" required>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [(ngModel)]="updatedUser.birthday" name="birthday" placeholder="Birthday" type="date">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [(ngModel)]="newPassword" name="newPassword" placeholder="New Password" type="password">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [(ngModel)]="confirmPassword" name="confirmPassword" placeholder="Confirm New Password" type="password">
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit">Save Changes</button>
+      <button mat-button type="button" (click)="toggleEditMode()">Cancel</button>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button *ngIf="!editMode" (click)="toggleEditMode()">Edit Profile</button>
+    <button mat-button color="warn" (click)="deleteAccount()">Delete Account</button>
+  </mat-card-actions>
+</mat-card>

@@ -5,6 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { FetchApiDataService } from '../services/fetch-api-data.service';
 import { Injectable } from '@angular/core';
 
@@ -29,8 +30,13 @@ export class UserProfileComponent implements OnInit {
   user: any = {};
   editMode: boolean = false;
   updatedUser: any = {};
+  newPassword: string = '';
+  confirmPassword: string = '';
 
-  constructor(private fetchApiData: FetchApiDataService) { }
+  constructor(
+    private fetchApiData: FetchApiDataService,
+    private snackBar: MatSnackBar
+  ) { }
 
   ngOnInit(): void {
     this.getUser();
@@ -53,18 +59,30 @@ export class UserProfileComponent implements OnInit {
     this.editMode = !this.editMode;
     if (!this.editMode) {
       this.updatedUser = { ...this.user };
+      this.newPassword = '';
+      this.confirmPassword = '';
     }
   }
 
   onSubmit(): void {
+    if (this.newPassword) {
+      if (this.newPassword !== this.confirmPassword) {
+        this.snackBar.open('New passwords do not match', 'OK', { duration: 2000 });
+        return;
+      }
+      this.updatedUser.password = this.newPassword;
+    }
+
     this.fetchApiData.updateUser(this.user.username, this.updatedUser).subscribe({
       next: (response: any) => {
         this.user = response;
         this.editMode = false;
         localStorage.setItem('user', JSON.stringify(this.user));
+        this.snackBar.open('Profile updated successfully', 'OK', { duration: 2000 });
       },
       error: (error: any) => {
         console.error('Error updating user:', error);
+        this.snackBar.open('Failed to update profile', 'OK', { duration: 2000 });
       }
     });
   }
@@ -74,10 +92,12 @@ export class UserProfileComponent implements OnInit {
       this.fetchApiData.deleteUser(this.user.username).subscribe({
         next: () => {
           localStorage.clear();
+          this.snackBar.open('Account deleted successfully', 'OK', { duration: 2000 });
           // Navigate to welcome page or login page
         },
         error: (error: any) => {
           console.error('Error deleting user:', error);
+          this.snackBar.open('Failed to delete account', 'OK', { duration: 2000 });
         }
       });
     }

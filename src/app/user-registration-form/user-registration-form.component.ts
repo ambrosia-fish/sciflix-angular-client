@@ -1,3 +1,9 @@
+/**
+ * User Registration Form Component for the Sci-Flix Angular application.
+ * This component handles the user registration process.
+ * @module UserRegistrationFormComponent
+ */
+
 import { Component, inject } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -12,11 +18,14 @@ import { MatButtonModule } from '@angular/material/button';
 // Import FormsModule for ngModel
 import { FormsModule } from '@angular/forms';
 
+/**
+ * Component for user registration form.
+ * Provides a form for new users to register with the application.
+ */
 @Component({
   selector: 'app-user-registration-form',
   templateUrl: './user-registration-form.component.html',
   styleUrls: ['./user-registration-form.component.scss'],
-  // Add standalone: true and import the necessary modules
   standalone: true,
   imports: [
     MatCardModule,
@@ -27,12 +36,21 @@ import { FormsModule } from '@angular/forms';
   ]
 })
 export class UserRegistrationFormComponent {
+  /** Object to hold user registration data */
   userData = { username: '', password: '', email: '', birthday: '' };
 
+  /** Service for API calls */
   private fetchApiData = inject(FetchApiDataService);
+  /** Reference to the dialog */
   private dialogRef = inject(MatDialogRef<UserRegistrationFormComponent>);
+  /** Service for displaying snack bar notifications */
   private snackBar = inject(MatSnackBar);
 
+  /**
+   * Registers a new user with the provided user data.
+   * On success, closes the dialog and shows a success message.
+   * On failure, displays an error message.
+   */
   registerUser(): void {
     console.log('Attempting to register user with data:', this.userData);
     this.fetchApiData.userRegistration(this.userData).subscribe({

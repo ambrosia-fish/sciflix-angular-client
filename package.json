@@ -10,7 +10,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:sci-flix-angular-client": "node dist/sci-flix-angular-client/server/server.mjs",
-    "dev": "lite-server"
+    "dev": "lite-server",
+    "docs": "typedoc --out docs/documentation --entryPointStrategy expand src/app"
   },
   "private": true,
   "dependencies": {
@@ -46,6 +47,7 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "lite-server": "^2.6.1",
+    "typedoc": "^0.26.7",
     "typescript": "~5.5.2"
   }
 }

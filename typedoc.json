@@ -1,0 +1,8 @@
+{
+    "entryPoints": ["src/app"],
+    "out": "docs/typedoc",
+    "exclude": ["**/*.spec.ts"],
+    "excludePrivate": true,
+    "excludeProtected": true,
+    "excludeExternals": true
+  }

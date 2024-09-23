@@ -1,3 +1,8 @@
+/**
+ * Main application configuration for the Sci-Flix Angular client.
+ * @module AppConfig
+ */
+
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter, withPreloading, PreloadAllModules, withHashLocation  } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
@@ -16,10 +21,14 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 console.log('app.config.ts is being loaded');
 console.log('Imported routes:', routes);
 
+/**
+ * Main application configuration.
+ * Sets up providers for routing, HTTP client, animations, and Material modules.
+ */
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes, withPreloading(PreloadAllModules),withHashLocation()),
+    provideRouter(routes, withPreloading(PreloadAllModules), withHashLocation()),
     provideClientHydration(),
     provideHttpClient(),
     provideAnimationsAsync(),
@@ -30,7 +39,8 @@ export const appConfig: ApplicationConfig = {
       MatInputModule,
       MatDialogModule,
       MatSnackBarModule
-    ), provideAnimationsAsync()
+    ),
+    provideAnimationsAsync()
   ]
 };
 

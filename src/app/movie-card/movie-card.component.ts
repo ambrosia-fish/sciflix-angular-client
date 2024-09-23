@@ -1,3 +1,9 @@
+/**
+ * Movie Card Component for the Sci-Flix Angular application.
+ * This component handles displaying movie information and user interactions.
+ * @module MovieCardComponent
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
@@ -9,6 +15,9 @@ import { GenreDialogComponent } from '../genre-dialog/genre-dialog.component';
 import { DirectorDialogComponent } from '../director-dialog/director-dialog.component';
 import { SynopsisDialogComponent } from '../synopsis-dialog/synopsis-dialog.component';
 
+/**
+ * Component for displaying movie cards and handling related user interactions.
+ */
 @Component({
   selector: 'app-movie-card',
   standalone: true,
@@ -17,27 +26,43 @@ import { SynopsisDialogComponent } from '../synopsis-dialog/synopsis-dialog.comp
   styleUrls: ['./movie-card.component.scss']
 })
 export class MovieCardComponent implements OnInit {
+  /** Array to store movie data */
   movies: any[] = [];
+  /** Array to store user's favorite movie IDs */
   favorites: string[] = [];
+  /** Current user's username */
   username: string | null = null;
 
+  /**
+   * @param fetchApiData - Service for API calls
+   * @param dialog - Service for opening dialogs
+   */
   constructor(
     private fetchApiData: FetchApiDataService,
     public dialog: MatDialog
   ) { }
 
+  /**
+   * Initializes the component, fetching movies and user data.
+   */
   ngOnInit(): void {
     this.getMovies();
     this.getUsernameFromStorage();
     this.getFavorites();
   }
 
+  /**
+   * Retrieves the username from local storage.
+   */
   getUsernameFromStorage(): void {
     const userString = localStorage.getItem('user');
     const user = userString ? JSON.parse(userString) : null;
     this.username = user ? user.username : null;
   }
 
+  /**
+   * Fetches all movies from the API.
+   */
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe({
       next: (resp: any) => {
@@ -49,6 +74,9 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
+  /**
+   * Fetches the user's favorite movies.
+   */
   getFavorites(): void {
     if (this.username) {
       this.fetchApiData.getUser(this.username).subscribe({
@@ -62,10 +90,19 @@ export class MovieCardComponent implements OnInit {
     }
   }
 
+  /**
+   * Checks if a movie is in the user's favorites.
+   * @param movieId - The ID of the movie to check
+   * @returns True if the movie is a favorite, false otherwise
+   */
   isFavorite(movieId: string): boolean {
     return this.favorites.includes(movieId);
   }
 
+  /**
+   * Toggles a movie's favorite status for the current user.
+   * @param movieId - The ID of the movie to toggle
+   */
   toggleFavorite(movieId: string): void {
     if (this.username) {
       this.fetchApiData.addRemoveFavoriteMovie(this.username, movieId).subscribe({
@@ -90,6 +127,10 @@ export class MovieCardComponent implements OnInit {
     }
   }
 
+  /**
+   * Opens a dialog displaying genre information.
+   * @param genreName - The name of the genre
+   */
   openGenreDialog(genreName: string): void {
     this.fetchApiData.getGenre(genreName).subscribe({
       next: (genre: any) => {
@@ -104,6 +145,10 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
+  /**
+   * Opens a dialog displaying director information.
+   * @param directorName - The name of the director
+   */
   openDirectorDialog(directorName: string): void {
     this.fetchApiData.getDirector(directorName).subscribe({
       next: (director: any) => {
@@ -118,6 +163,10 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
+  /**
+   * Opens a dialog displaying the movie synopsis.
+   * @param movieTitle - The title of the movie
+   */
   openSynopsisDialog(movieTitle: string): void {
     this.fetchApiData.getOneMovie(movieTitle).subscribe({
       next: (movie: any) => {

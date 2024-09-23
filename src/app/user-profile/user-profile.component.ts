@@ -1,3 +1,9 @@
+/**
+ * User Profile Component for the Sci-Flix Angular application.
+ * This component handles displaying and editing user profile information.
+ * @module UserProfileComponent
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -9,6 +15,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { FetchApiDataService } from '../services/fetch-api-data.service';
 import { Injectable } from '@angular/core';
 
+/**
+ * Component for user profile management.
+ * Allows users to view and edit their profile information.
+ */
 @Component({
   selector: 'app-user-profile',
   standalone: true,
@@ -27,21 +37,36 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class UserProfileComponent implements OnInit {
+  /** Current user data */
   user: any = {};
+  /** Flag to toggle edit mode */
   editMode: boolean = false;
+  /** Updated user data */
   updatedUser: any = {};
+  /** New password input */
   newPassword: string = '';
+  /** Confirm password input */
   confirmPassword: string = '';
 
+  /**
+   * @param fetchApiData - Service for API calls
+   * @param snackBar - Service for displaying snack bar notifications
+   */
   constructor(
     private fetchApiData: FetchApiDataService,
     private snackBar: MatSnackBar
   ) { }
 
+  /**
+   * Initializes the component by fetching user data.
+   */
   ngOnInit(): void {
     this.getUser();
   }
 
+  /**
+   * Fetches user data from the API.
+   */
   getUser(): void {
     const username = JSON.parse(localStorage.getItem('user') || '{}').username;
     this.fetchApiData.getUser(username).subscribe({
@@ -55,6 +80,9 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
+  /**
+   * Toggles edit mode for the profile.
+   */
   toggleEditMode(): void {
     this.editMode = !this.editMode;
     if (!this.editMode) {
@@ -64,6 +92,9 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
+  /**
+   * Submits updated user profile information.
+   */
   onSubmit(): void {
     if (this.newPassword) {
       if (this.newPassword !== this.confirmPassword) {
@@ -87,6 +118,9 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
+  /**
+   * Deletes the user account after confirmation.
+   */
   deleteAccount(): void {
     if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
       this.fetchApiData.deleteUser(this.user.username).subscribe({

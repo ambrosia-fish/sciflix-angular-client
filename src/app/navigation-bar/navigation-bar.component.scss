@@ -1,4 +1,27 @@
 .spacer {
-    flex: 1 1 auto;
+  flex: 1 1 auto;
+}
+
+:host ::ng-deep {
+  .mat-toolbar {
+    background-color: var(--mid-color-primary);
+    border-bottom: 1px solid rgba(74, 93, 143, 0.2);
   }
-  
+
+  .sci-flix-title {
+    font-family: var(--font-family-sci-fi);
+    font-size: 1.5rem;
+    color: var(--light-color-primary);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .mat-mdc-button {
+    color: var(--light-color-primary);
+    font-family: var(--font-family-base);
+    
+    &:hover {
+      background-color: rgba(74, 93, 143, 0.2);
+    }
+  }
+}

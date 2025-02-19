@@ -1,0 +1,49 @@
+.search-container {
+  padding: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+
+  ::ng-deep {
+    .mat-mdc-form-field {
+      width: 100%;
+
+      .mdc-text-field--outlined {
+        background-color: var(--mid-color-primary);
+        border-radius: 8px;
+      }
+
+      .mdc-floating-label, 
+      .mdc-text-field__input {
+        color: var(--light-color-primary) !important;
+        font-family: var(--font-family-sci-fi) !important;
+      }
+
+      .mdc-notched-outline__leading,
+      .mdc-notched-outline__notch,
+      .mdc-notched-outline__trailing {
+        border-color: var(--accent-color) !important;
+      }
+
+      &:hover .mdc-notched-outline__leading,
+      &:hover .mdc-notched-outline__notch,
+      &:hover .mdc-notched-outline__trailing {
+        border-color: var(--light-color-primary) !important;
+      }
+
+      &.mat-focused {
+        .mdc-notched-outline__leading,
+        .mdc-notched-outline__notch,
+        .mdc-notched-outline__trailing {
+          border-color: var(--light-color-primary) !important;
+        }
+      }
+    }
+  }
+}
+
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 1.5rem;
+}

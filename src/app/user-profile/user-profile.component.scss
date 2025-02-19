@@ -1,0 +1,57 @@
+.profile-container {
+  padding: 1.5rem;
+}
+
+.profile-card {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: var(--mid-color-primary);
+  color: var(--light-color-primary);
+  margin-bottom: 2rem;
+
+  mat-card-title {
+    font-family: var(--font-family-sci-fi);
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  p {
+    margin-bottom: 1rem;
+    font-family: var(--font-family-base);
+  }
+
+  button {
+    font-family: var(--font-family-sci-fi);
+    margin-right: 1rem; // Add spacing between buttons
+
+    &.mat-mdc-raised-button {
+      &.mat-primary {
+        background-color: var(--accent-color);
+        color: var(--light-color-primary);
+      }
+
+      &.mat-warn {
+        background-color: #a8314c;
+      }
+    }
+
+    &:last-child {
+      margin-right: 0; // Remove margin from last button
+    }
+  }
+}
+
+.favorites-section {
+  h2 {
+    font-family: var(--font-family-sci-fi);
+    color: var(--light-color-primary);
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}

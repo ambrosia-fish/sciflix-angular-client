@@ -1,36 +1,55 @@
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>User Profile</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <div *ngIf="!editMode">
-      <p><strong>Username:</strong> {{user.username}}</p>
-      <p><strong>Email:</strong> {{user.email}}</p>
-      <p><strong>Birthday:</strong> {{user.birthday | date}}</p>
-    </div>
+<div class="profile-container">
+  <!-- User Profile Card -->
+  <mat-card class="profile-card">
+    <mat-card-header>
+      <mat-card-title>Profile</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div *ngIf="!editMode">
+        <p><strong>Username:</strong> {{ user.username }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <button mat-raised-button color="primary" (click)="toggleEditMode()">Edit Profile</button>
+        <button mat-raised-button color="warn" (click)="deleteAccount()">Delete Account</button>
+      </div>
 
-    <form *ngIf="editMode" (ngSubmit)="onSubmit()">
-      <mat-form-field>
-        <input matInput [(ngModel)]="updatedUser.username" name="username" placeholder="Username" required>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput [(ngModel)]="updatedUser.email" name="email" placeholder="Email" required>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput [(ngModel)]="updatedUser.birthday" name="birthday" placeholder="Birthday" type="date">
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput [(ngModel)]="newPassword" name="newPassword" placeholder="New Password" type="password">
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput [(ngModel)]="confirmPassword" name="confirmPassword" placeholder="Confirm New Password" type="password">
-      </mat-form-field>
-      <button mat-raised-button color="primary" type="submit">Save Changes</button>
-      <button mat-button type="button" (click)="toggleEditMode()">Cancel</button>
-    </form>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-button *ngIf="!editMode" (click)="toggleEditMode()">Edit Profile</button>
-    <button mat-button color="warn" (click)="deleteAccount()">Delete Account</button>
-  </mat-card-actions>
-</mat-card>
+      <form *ngIf="editMode" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="fill">
+          <mat-label>Username</mat-label>
+          <input matInput [(ngModel)]="updatedUser.username" name="username" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput [(ngModel)]="updatedUser.email" name="email" required type="email">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>New Password</mat-label>
+          <input matInput [(ngModel)]="newPassword" name="password" type="password">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Confirm New Password</mat-label>
+          <input matInput [(ngModel)]="confirmPassword" name="confirmPassword" type="password">
+        </mat-form-field>
+
+        <div class="button-container">
+          <button mat-raised-button type="submit" color="primary">Save Changes</button>
+          <button mat-raised-button type="button" (click)="toggleEditMode()">Cancel</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Favorite Movies Section -->
+  <section class="favorites-section">
+    <h2>Favorite Movies</h2>
+    <div class="movie-grid">
+      <app-movie-card 
+        *ngFor="let movie of favoriteMovies" 
+        [movie]="movie"
+        (movieRemoved)="handleMovieRemoved($event)"
+      ></app-movie-card>
+    </div>
+  </section>
+</div>

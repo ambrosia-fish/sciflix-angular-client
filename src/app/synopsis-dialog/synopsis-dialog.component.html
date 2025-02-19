@@ -1,7 +1,9 @@
-<h2 mat-dialog-title>{{ data.title }}</h2>
-<mat-dialog-content>
-  <p>{{ data.synopsis }}</p>
-</mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-button (click)="onClose()">Close</button>
-</mat-dialog-actions>
+<div class="synopsis-dialog">
+  <h2 mat-dialog-title class="dialog-title">{{ data.title }}</h2>
+  <mat-dialog-content class="dialog-content">
+    <p>{{ data.synopsis }}</p>
+  </mat-dialog-content>
+  <mat-dialog-actions class="dialog-actions">
+    <button mat-button class="close-button" (click)="onClose()">Close</button>
+  </mat-dialog-actions>
+</div>

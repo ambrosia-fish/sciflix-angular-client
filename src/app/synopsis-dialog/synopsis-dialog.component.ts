@@ -1,19 +1,26 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
+import { CommonModule } from '@angular/common';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-synopsis-dialog',
   standalone: true,
-  imports: [MatDialogModule, MatButtonModule],
+  imports: [
+    CommonModule,
+    MatDialogModule,
+    MatButtonModule
+  ],
   templateUrl: './synopsis-dialog.component.html',
-  styleUrl: './synopsis-dialog.component.scss'
+  styleUrls: ['./synopsis-dialog.component.scss']
 })
 export class SynopsisDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<SynopsisDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { title: string; synopsis: string }
-  ) {}
+    @Inject(MAT_DIALOG_DATA) public data: { title: string; synopsis: string; }
+  ) {
+    dialogRef.addPanelClass('synopsis-dialog');
+  }
 
   onClose(): void {
     this.dialogRef.close();

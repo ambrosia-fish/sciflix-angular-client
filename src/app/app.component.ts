@@ -10,7 +10,12 @@ import { AuthService } from './services/auth.service';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavigationBarComponent, CommonModule, UserLoginFormComponent],
+  imports: [
+    RouterOutlet,
+    NavigationBarComponent,
+    CommonModule,
+    UserLoginFormComponent
+  ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
@@ -22,16 +27,18 @@ export class AppComponent {
     private router: Router,
     public authService: AuthService
   ) {
+    // Subscribe to router events to determine if we're on the welcome page
     this.router.events.pipe(
-      filter((event): event is NavigationEnd => event instanceof NavigationEnd)
-    ).subscribe((event: NavigationEnd) => {
-      this.isWelcomePage = event.urlAfterRedirects === '/welcome';
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        // Show nav bar for all routes except welcome and login
+        this.isWelcomePage = ['/welcome', '/login'].includes(event.urlAfterRedirects);
+      }
     });
-  }
 
-  openLoginDialog(): void {
-    this.dialog.open(UserLoginFormComponent, {
-      width: '280px'
-    });
+    // Check initial route
+    const currentUrl = this.router.url;
+    this.isWelcomePage = ['/welcome', '/login'].includes(currentUrl);
   }
 }

@@ -1,21 +1,40 @@
-<div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
-  @for (movie of movies; track movie._id) {
-    <mat-card style="margin: 10px; width: 300px;">
-      <mat-card-header>
-        <mat-card-title>{{movie.Title}}</mat-card-title>
-        <mat-card-subtitle>Directed by: {{movie.Director.Name}}</mat-card-subtitle>
-      </mat-card-header>
-      <img mat-card-image [src]="movie.Poster" [alt]="movie.Title">
-      <mat-card-actions>
-        <button mat-button color="primary" (click)="openGenreDialog(movie.Genre.Name)">Genre</button>
-        <button mat-button color="primary" (click)="openDirectorDialog(movie.Director.Name)">Director</button>
-        <button mat-button color="primary" (click)="openSynopsisDialog(movie.Title)">Synopsis</button>
-        <button mat-icon-button (click)="toggleFavorite(movie._id)" aria-label="Toggle favorite">
-          <mat-icon [color]="isFavorite(movie._id) ? 'warn' : ''">
-            {{isFavorite(movie._id) ? 'favorite' : 'favorite_border'}}
-          </mat-icon>
-        </button>
-      </mat-card-actions>
-    </mat-card>
-  }
-</div>
+<mat-card class="mdc-card">
+  <img
+    *ngIf="movie?.poster"
+    [src]="movie.poster"
+    [alt]="movie.title"
+    class="movie-poster"
+  >
+  <div *ngIf="!movie?.poster" class="movie-poster placeholder">
+    No Image Available
+  </div>
+
+  <mat-card-content class="mdc-card__content">
+    <h2 class="movie-title">{{ movie.title }}</h2>
+    <div class="movie-genre">{{ movie.genre }}</div>
+    <div class="movie-director">
+      <strong>Director:</strong> {{ movie.director }}
+    </div>
+    <div class="movie-rating">
+      <strong>Rating:</strong> {{ movie.rating | number:'1.1-1' }}/10
+    </div>
+  </mat-card-content>
+
+  <div class="card-actions">
+    <button 
+      mat-button 
+      class="synopsis-button"
+      (click)="openSynopsisDialog(movie)"
+    >
+      Synopsis
+    </button>
+    <button 
+      mat-icon-button 
+      class="favorite-button"
+      [class.favorite]="isFavorite(movie.id)"
+      (click)="toggleFavorite(movie.id)"
+    >
+      <mat-icon>{{ isFavorite(movie.id) ? 'favorite' : 'favorite_border' }}</mat-icon>
+    </button>
+  </div>
+</mat-card>

@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "docs",
+            "outputPath": "dist/sci-flix-angular-client",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "baseHref": "/sciflix-angular-client/",
@@ -111,9 +111,12 @@
         "deploy": {
           "builder": "angular-cli-ghpages:deploy",
           "options": {
-            "baseHref": "/sci-flix-angular-client/",
+            "baseHref": "/sciflix-angular-client/",
             "name": "Your Name",
-            "email": "your.email@example.com"
+            "email": "your.email@example.com",
+            "noBuild": false,
+            "noSilent": true,
+            "cname": false
           }
         }
       }

@@ -1,0 +1,40 @@
+.main-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  padding: 2rem;
+
+  h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 4rem;
+    font-weight: 700;
+    color: #d7e0ea;
+    margin-bottom: 3rem;
+    text-shadow: 0 0 20px rgba(#4a5d8f, 0.8),
+                 0 0 40px rgba(#4a5d8f, 0.4);
+    letter-spacing: 2px;
+  }
+
+  .button-container {
+    display: flex;
+    gap: 1.5rem;
+
+    button {
+      min-width: 150px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.1rem;
+      padding: 0.75rem 1.5rem;
+      background-color: #4a5d8f !important;
+      color: #d7e0ea !important;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: lighten(#4a5d8f, 10%) !important;
+        box-shadow: 0 0 15px rgba(#4a5d8f, 0.5);
+        transform: translateY(-2px);
+      }
+    }
+  }
+}

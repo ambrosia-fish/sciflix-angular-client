@@ -5,9 +5,13 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FetchApiDataService } from '../services/fetch-api-data.service';
-import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MovieCardComponent } from '../movie-card/movie-card.component';
 
 @Component({
   selector: 'app-user-profile',
@@ -18,16 +22,17 @@ import { Injectable } from '@angular/core';
     MatCardModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatIconModule,
+    MatDialogModule,
+    MovieCardComponent
   ],
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss']
 })
-@Injectable({
-  providedIn: 'root'
-})
 export class UserProfileComponent implements OnInit {
   user: any = {};
+  favoriteMovies: any[] = [];
   editMode: boolean = false;
   updatedUser: any = {};
   newPassword: string = '';
@@ -35,7 +40,9 @@ export class UserProfileComponent implements OnInit {
 
   constructor(
     private fetchApiData: FetchApiDataService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -48,11 +55,30 @@ export class UserProfileComponent implements OnInit {
       next: (response: any) => {
         this.user = response;
         this.updatedUser = { ...this.user };
+        this.getFavoriteMovies();
       },
       error: (error: any) => {
         console.error('Error fetching user:', error);
       }
     });
+  }
+
+  getFavoriteMovies(): void {
+    this.fetchApiData.getAllMovies().subscribe({
+      next: (movies: any[]) => {
+        this.favoriteMovies = movies.filter(movie => 
+          this.user.favoriteMovies?.includes(movie.id.toString())
+        );
+      },
+      error: (error) => {
+        console.error('Error fetching favorite movies:', error);
+      }
+    });
+  }
+
+  handleMovieRemoved(movieId: number): void {
+    // Remove the movie from the favoriteMovies array immediately
+    this.favoriteMovies = this.favoriteMovies.filter(movie => movie.id !== movieId);
   }
 
   toggleEditMode(): void {
@@ -73,7 +99,7 @@ export class UserProfileComponent implements OnInit {
       this.updatedUser.password = this.newPassword;
     }
 
-    this.fetchApiData.updateUser(this.user.username, this.updatedUser).subscribe({
+    this.fetchApiData.editUser(this.user.username, this.updatedUser).subscribe({
       next: (response: any) => {
         this.user = response;
         this.editMode = false;
@@ -93,7 +119,7 @@ export class UserProfileComponent implements OnInit {
         next: () => {
           localStorage.clear();
           this.snackBar.open('Account deleted successfully', 'OK', { duration: 2000 });
-          // Navigate to welcome page or login page
+          this.router.navigate(['/login']);
         },
         error: (error: any) => {
           console.error('Error deleting user:', error);

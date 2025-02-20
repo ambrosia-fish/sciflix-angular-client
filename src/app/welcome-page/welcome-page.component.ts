@@ -1,20 +1,30 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { UserLoginFormComponent } from '../user-login-form/user-login-form.component';
+import { Router } from '@angular/router';
 import { UserRegistrationFormComponent } from '../user-registration-form/user-registration-form.component';
+import { UserLoginFormComponent } from '../user-login-form/user-login-form.component';
+import { FetchApiDataService } from '../services/fetch-api-data.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-welcome-page',
   standalone: true,
-  imports: [MatButtonModule],
+  imports: [
+    CommonModule,
+    MatButtonModule
+  ],
   templateUrl: './welcome-page.component.html',
   styleUrls: ['./welcome-page.component.scss']
 })
 export class WelcomePageComponent {
-  @Output() loginSuccess = new EventEmitter<void>();
-
-  constructor(public dialog: MatDialog) { }
+  constructor(
+    public dialog: MatDialog,
+    private fetchApiData: FetchApiDataService,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) {}
 
   openUserRegistrationDialog(): void {
     this.dialog.open(UserRegistrationFormComponent, {
@@ -23,13 +33,23 @@ export class WelcomePageComponent {
   }
 
   openUserLoginDialog(): void {
-    const dialogRef = this.dialog.open(UserLoginFormComponent, {
+    this.dialog.open(UserLoginFormComponent, {
       width: '280px'
     });
+  }
 
-    dialogRef.componentInstance.loginSuccess.subscribe(() => {
-      this.loginSuccess.emit();
-      dialogRef.close();
+  guestLogin(): void {
+    this.fetchApiData.userLogin({ username: 'Guest', password: 'GuestPassword' }).subscribe({
+      next: (result) => {
+        localStorage.setItem('user', JSON.stringify(result.user));
+        localStorage.setItem('token', result.token);
+        this.router.navigate(['movies']);
+        this.snackBar.open('Logged in as guest', 'OK', { duration: 2000 });
+      },
+      error: (error) => {
+        this.snackBar.open('Guest login failed', 'OK', { duration: 2000 });
+        console.error('Guest login error:', error);
+      }
     });
   }
 }

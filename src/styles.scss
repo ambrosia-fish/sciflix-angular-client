@@ -1,7 +1,96 @@
-/* You can add global styles to this file, and also import other style files */
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Roboto:wght@300;400;700&display=swap');
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* Base Variables */
+:root {
+  --dark-color-primary: #0b1424;
+  --mid-color-primary: #25375c;
+  --light-color-primary: #d7e0ea;
+  --accent-color: #4a5d8f;
+  --font-family-base: 'Roboto', sans-serif;
+  --font-family-sci-fi: 'Orbitron', sans-serif;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* Reset and Base Styles */
+html, body { 
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: var(--dark-color-primary);
+  color: var(--light-color-primary);
+}
+
+/* Material Overrides */
+.mat-mdc-card {
+  background-color: var(--mid-color-primary) !important;
+  color: var(--light-color-primary) !important;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-sci-fi);
+  margin: 0;
+  padding: 0;
+}
+
+/* Movie Card Specific Overrides */
+.movie-title {
+  font-family: var(--font-family-sci-fi) !important;
+}
+
+.movie-genre, 
+.movie-director {
+  font-family: var(--font-family-base) !important;
+}
+
+.synopsis-button {
+  font-family: var(--font-family-sci-fi) !important;
+  color: var(--accent-color) !important;
+}
+
+/* Movie Cards Grid */
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.5rem;
+  padding: 1.5rem;
+}
+
+/* Material Card Overrides */
+.mat-mdc-card-content {
+  padding: 16px !important;
+}
+
+.mat-mdc-button {
+  font-family: var(--font-family-sci-fi) !important;
+}
+
+.mat-mdc-card-title {
+  font-family: var(--font-family-sci-fi) !important;
+  color: var(--light-color-primary) !important;
+}
+
+/* Utility Classes */
+.text-sci-fi {
+  font-family: var(--font-family-sci-fi) !important;
+}
+
+.text-glow {
+  text-shadow: 0 0 10px rgba(74, 93, 143, 0.3);
+}
+
+.bg-dark {
+  background-color: var(--dark-color-primary);
+}
+
+.bg-mid {
+  background-color: var(--mid-color-primary);
+}
+
+.color-accent {
+  color: var(--accent-color);
+}
+
+.color-light {
+  color: var(--light-color-primary);
+}

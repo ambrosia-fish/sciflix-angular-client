@@ -44,4 +44,18 @@ export class UserLoginFormComponent {
       }
     });
   }
+
+  guestLogin(): void {
+    this.authService.login('Guest', 'GuestPassword').subscribe({
+      next: () => {
+        this.snackBar.open('Guest login successful', 'OK', { duration: 2000 });
+        this.loginSuccess.emit();
+        this.dialogRef.close();
+      },
+      error: (error) => {
+        console.error('Guest login error', error);
+        this.snackBar.open('Guest login failed', 'OK', { duration: 5000 });
+      }
+    });
+  }
 }

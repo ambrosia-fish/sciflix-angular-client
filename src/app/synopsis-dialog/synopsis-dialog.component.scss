@@ -1,0 +1,41 @@
+::ng-deep .synopsis-dialog {
+  .mat-mdc-dialog-surface {
+    background-color: var(--mid-color-primary) !important;
+    color: var(--light-color-primary) !important;
+    border-radius: 12px;
+    padding: 1rem;
+  }
+}
+
+.dialog-title {
+  font-family: var(--font-family-sci-fi);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--light-color-primary);
+  letter-spacing: 0.05em;
+}
+
+.dialog-content {
+  font-family: var(--font-family-base);
+  color: var(--light-color-primary);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+
+  .close-button {
+    font-family: var(--font-family-sci-fi);
+    color: var(--light-color-primary);
+    border: 1px solid var(--light-color-primary);
+    border-radius: 4px;
+    padding: 4px 16px;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: rgba(215, 224, 234, 0.1);
+    }
+  }
+}

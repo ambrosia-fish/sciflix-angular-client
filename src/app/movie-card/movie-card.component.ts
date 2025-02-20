@@ -1,35 +1,49 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { FetchApiDataService } from '../services/fetch-api-data.service';
-import { GenreDialogComponent } from '../genre-dialog/genre-dialog.component';
-import { DirectorDialogComponent } from '../director-dialog/director-dialog.component';
 import { SynopsisDialogComponent } from '../synopsis-dialog/synopsis-dialog.component';
 
 @Component({
   selector: 'app-movie-card',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatButtonModule, MatIconModule, GenreDialogComponent, MatDialogModule],
+  imports: [
+    CommonModule, 
+    MatCardModule, 
+    MatButtonModule, 
+    MatIconModule, 
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule
+  ],
   templateUrl: './movie-card.component.html',
   styleUrls: ['./movie-card.component.scss']
 })
 export class MovieCardComponent implements OnInit {
-  movies: any[] = [];
-  favorites: string[] = [];
+  @Input() movie: any;
+  @Output() movieRemoved = new EventEmitter<number>();
   username: string | null = null;
+  favorites: string[] = [];
 
   constructor(
     private fetchApiData: FetchApiDataService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
-    this.getMovies();
     this.getUsernameFromStorage();
-    this.getFavorites();
+    if (this.username) {
+      this.loadFavorites();
+    }
   }
 
   getUsernameFromStorage(): void {
@@ -38,22 +52,11 @@ export class MovieCardComponent implements OnInit {
     this.username = user ? user.username : null;
   }
 
-  getMovies(): void {
-    this.fetchApiData.getAllMovies().subscribe({
-      next: (resp: any) => {
-        this.movies = resp;
-      },
-      error: (error) => {
-        console.error('Error fetching movies:', error);
-      }
-    });
-  }
-
-  getFavorites(): void {
+  loadFavorites(): void {
     if (this.username) {
       this.fetchApiData.getUser(this.username).subscribe({
         next: (user: any) => {
-          this.favorites = user.favoriteMovies;
+          this.favorites = user.favoriteMovies || [];
         },
         error: (error) => {
           console.error('Error fetching favorites:', error);
@@ -62,75 +65,45 @@ export class MovieCardComponent implements OnInit {
     }
   }
 
-  isFavorite(movieId: string): boolean {
-    return this.favorites.includes(movieId);
+  isFavorite(movieId: number): boolean {
+    return this.favorites.includes(movieId.toString());
   }
 
-  toggleFavorite(movieId: string): void {
-    if (this.username) {
-      this.fetchApiData.addRemoveFavoriteMovie(this.username, movieId).subscribe({
-        next: (resp: any) => {
-          if (resp.FavoriteMovies) {
-            this.favorites = resp.FavoriteMovies;
-          } else {
-            const index = this.favorites.indexOf(movieId);
-            if (index === -1) {
-              this.favorites.push(movieId);
-            } else {
-              this.favorites.splice(index, 1);
-            }
-          }
-        },
-        error: (error) => {
-          console.error('Error toggling favorite:', error);
-        }
-      });
-    } else {
-      console.error('Username not found in storage');
+  toggleFavorite(movieId: number): void {
+    if (!this.username) {
+      this.snackBar.open('Please log in to add favorites', 'OK', { duration: 2000 });
+      return;
     }
-  }
 
-  openGenreDialog(genreName: string): void {
-    this.fetchApiData.getGenre(genreName).subscribe({
-      next: (genre: any) => {
-        this.dialog.open(GenreDialogComponent, {
-          width: '250px',
-          data: { Name: genreName, Description: genre.genreDescription }
-        });
+    this.fetchApiData.addMovieToFavorites(this.username, movieId.toString()).subscribe({
+      next: (response: any) => {
+        this.favorites = response.favorites || [];
+        const isNowFavorite = this.favorites.includes(movieId.toString());
+        
+        this.snackBar.open(
+          isNowFavorite ? 'Movie added to favorites' : 'Movie removed from favorites',
+          'OK',
+          { duration: 2000 }
+        );
+
+        // Emit event when movie is removed from favorites
+        if (!isNowFavorite) {
+          this.movieRemoved.emit(movieId);
+        }
       },
       error: (error) => {
-        console.error(`Error fetching genre ${genreName}:`, error);
+        console.error('Error toggling favorite:', error);
+        this.snackBar.open('Error updating favorites', 'OK', { duration: 2000 });
       }
     });
   }
 
-  openDirectorDialog(directorName: string): void {
-    this.fetchApiData.getDirector(directorName).subscribe({
-      next: (director: any) => {
-        this.dialog.open(DirectorDialogComponent, {
-          width: '250px',
-          data: director
-        });
-      },
-      error: (error) => {
-        console.error(`Error fetching director ${directorName}:`, error);
-      }
-    });
-  }
-
-  openSynopsisDialog(movieTitle: string): void {
-    this.fetchApiData.getOneMovie(movieTitle).subscribe({
-      next: (movie: any) => {
-        this.dialog.open(SynopsisDialogComponent, {
-          width: '400px',
-          data: {
-            title: movie.Title,
-            synopsis: movie.Description
-          }
-        });
-      },
-      error: (error) => {
-        console.error(`Error fetching movie ${movieTitle}:`, error);
+  openSynopsisDialog(movie: any): void {
+    this.dialog.open(SynopsisDialogComponent, {
+      width: '400px',
+      data: {
+        title: movie.title,
+        synopsis: movie.description
       }
     });
   }

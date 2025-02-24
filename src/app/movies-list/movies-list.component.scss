@@ -56,7 +56,6 @@
   }
 }
 
-/* Desktop Grid View */
 .movie-grid {
   display: grid;
   gap: 1.5rem;
@@ -66,6 +65,13 @@
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   
   /* Media queries for different screen sizes */
+  @media (max-width: 599px) {
+    /* For mobile phones - single column */
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1rem 0.75rem;
+  }
+  
   @media (min-width: 600px) and (max-width: 899px) {
     /* For tablets - two columns */
     grid-template-columns: repeat(2, 1fr);
@@ -82,106 +88,25 @@
   }
 }
 
-/* Mobile Swipe View */
-.movie-swipe {
-  position: relative;
+/* Pull-to-refresh indicator styling */
+.refresh-indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  height: calc(100vh - 130px); /* Account for header and search bar */
-  overflow: hidden;
+  height: 60px;
+  color: var(--light-color-primary);
+  font-family: var(--font-family-sci-fi);
+  font-size: 14px;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+  pointer-events: none;
   
-  .swipe-container {
-    display: flex;
-    transition: transform 0.3s ease;
-    height: 100%;
-    
-    app-movie-card {
-      min-width: 100%;
-      max-width: 100%;
-      flex: 0 0 100%;
-      opacity: 0.3;
-      transition: opacity 0.3s ease;
-      transform: scale(0.85);
-      transition: transform 0.3s ease;
-      
-      &.active {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
+  &.visible {
+    opacity: 1;
   }
   
-  .swipe-indicator {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: rgba(74, 93, 143, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    
-    &.active {
-      opacity: 0.7;
-    }
-    
-    &.left {
-      left: 10px;
-    }
-    
-    &.right {
-      right: 10px;
-    }
-    
-    mat-icon {
-      color: var(--light-color-primary);
-    }
-  }
-  
-  .swipe-dots {
-    position: absolute;
-    bottom: 20px;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    z-index: 10;
-    
-    .dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background-color: rgba(215, 224, 234, 0.3);
-      transition: all 0.3s ease;
-      
-      &.active {
-        background-color: var(--light-color-primary);
-        transform: scale(1.2);
-      }
-    }
-  }
-}
-
-/* Show/hide views based on screen size */
-.desktop-view {
-  display: grid;
-}
-
-.mobile-view {
-  display: none;
-}
-
-@media (max-width: 599px) {
-  .desktop-view {
-    display: none;
-  }
-  
-  .mobile-view {
-    display: block;
+  .mat-spinner {
+    margin-right: 12px;
   }
 }

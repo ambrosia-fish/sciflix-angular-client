@@ -1,13 +1,13 @@
-<div class="welcome-container">
-  <h1 class="welcome-title">Welcome to Sci-Flix!</h1>
-  <div class="actions-container">
-    <button mat-raised-button class="signup-button" (click)="openUserRegistrationDialog()">
+<div class="main-page">
+  <h1>Welcome to Sci-Flix!</h1>
+  <div class="button-container">
+    <button mat-raised-button (click)="openUserRegistrationDialog()">
       Sign Up
     </button>
-    <button mat-raised-button class="login-button" (click)="openUserLoginDialog()">
+    <button mat-raised-button (click)="openUserLoginDialog()">
       Login
     </button>
-    <button mat-raised-button class="guest-login-button" (click)="guestLogin()">
+    <button mat-raised-button (click)="guestLogin()">
       Guest Login
     </button>
   </div>

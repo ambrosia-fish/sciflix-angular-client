@@ -13,8 +13,7 @@ import { AuthService } from './services/auth.service';
   imports: [
     RouterOutlet,
     NavigationBarComponent,
-    CommonModule,
-    UserLoginFormComponent
+    CommonModule
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']

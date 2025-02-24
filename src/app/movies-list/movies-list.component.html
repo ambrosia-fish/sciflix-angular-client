@@ -5,9 +5,40 @@
   </mat-form-field>
 </div>
 
-<div class="movie-grid">
+<!-- Desktop Grid View -->
+<div class="movie-grid desktop-view">
   <app-movie-card 
-    *ngFor="let movie of movies" 
+    *ngFor="let movie of filteredMovies" 
     [movie]="movie"
   ></app-movie-card>
+</div>
+
+<!-- Mobile Swipe View -->
+<div class="movie-swipe mobile-view" (touchstart)="onTouchStart($event)" (touchend)="onTouchEnd($event)">
+  <div class="swipe-indicator left" [class.active]="canSwipeLeft">
+    <mat-icon>chevron_left</mat-icon>
+  </div>
+  
+  <div class="swipe-container" [style.transform]="'translateX(' + swipeOffset + 'px)'">
+    <app-movie-card 
+      *ngFor="let movie of filteredMovies; let i = index" 
+      [movie]="movie"
+      [class.active]="i === currentMovieIndex"
+      [class.previous]="i === currentMovieIndex - 1"
+      [class.next]="i === currentMovieIndex + 1"
+    ></app-movie-card>
+  </div>
+  
+  <div class="swipe-indicator right" [class.active]="canSwipeRight">
+    <mat-icon>chevron_right</mat-icon>
+  </div>
+  
+  <div class="swipe-dots">
+    <div 
+      *ngFor="let movie of filteredMovies; let i = index"
+      class="dot"
+      [class.active]="i === currentMovieIndex"
+      (click)="goToMovie(i)"
+    ></div>
+  </div>
 </div>

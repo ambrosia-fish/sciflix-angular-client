@@ -43,7 +43,32 @@
 
 .movie-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 1.5rem;
   padding: 1.5rem;
+  
+  /* Responsive grid with auto-fit and minmax for better mobile layout */
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  
+  /* Media queries for different screen sizes */
+  @media (max-width: 599px) {
+    /* For mobile phones - single column */
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  @media (min-width: 600px) and (max-width: 899px) {
+    /* For tablets - two columns */
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @media (min-width: 900px) and (max-width: 1199px) {
+    /* For small desktops - three columns */
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  @media (min-width: 1200px) {
+    /* For large desktops - four or more columns */
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
 }

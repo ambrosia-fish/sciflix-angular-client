@@ -1,40 +1,98 @@
-.main-page {
+.welcome-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 80vh;
+  min-height: 100vh;
   padding: 2rem;
-
-  h1 {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 4rem;
-    font-weight: 700;
-    color: #d7e0ea;
-    margin-bottom: 3rem;
-    text-shadow: 0 0 20px rgba(#4a5d8f, 0.8),
-                 0 0 40px rgba(#4a5d8f, 0.4);
-    letter-spacing: 2px;
+  background-color: var(--dark-color-primary);
+  position: relative;
+  overflow: hidden;
+  
+  /* Create a subtle sci-fi grid backdrop */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      linear-gradient(rgba(74, 93, 143, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(74, 93, 143, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: 1;
+    pointer-events: none;
   }
+}
 
-  .button-container {
-    display: flex;
-    gap: 1.5rem;
+.welcome-title {
+  font-family: var(--font-family-sci-fi);
+  color: var(--light-color-primary);
+  font-size: 4rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  text-shadow: 0 0 15px rgba(215, 224, 234, 0.5);
+  line-height: 1.2;
+  z-index: 2;
+  
+  /* Responsive font size */
+  @media (max-width: 599px) {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+  }
+}
 
+.actions-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  z-index: 2;
+  width: 100%;
+  max-width: 600px;
+  
+  /* Stack buttons on very small screens */
+  @media (max-width: 480px) {
+    flex-direction: column;
+    width: 100%;
+    
     button {
-      min-width: 150px;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1.1rem;
-      padding: 0.75rem 1.5rem;
-      background-color: #4a5d8f !important;
-      color: #d7e0ea !important;
-      transition: all 0.3s ease;
-
-      &:hover {
-        background-color: lighten(#4a5d8f, 10%) !important;
-        box-shadow: 0 0 15px rgba(#4a5d8f, 0.5);
-        transform: translateY(-2px);
-      }
+      width: 100%;
+      margin-bottom: 0.5rem;
     }
+  }
+}
+
+button {
+  padding: 1rem 2rem;
+  min-width: 150px;
+  border-radius: 8px;
+  font-family: var(--font-family-sci-fi);
+  font-size: 1.25rem;
+  border: none;
+  background-color: var(--accent-color);
+  color: var(--light-color-primary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  
+  /* Larger touch targets on mobile */
+  @media (max-width: 599px) {
+    padding: 1.25rem 2rem;
+    font-size: 1.2rem;
+    min-height: 64px;
+  }
+  
+  &:hover {
+    background-color: lighten(var(--accent-color), 10%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+  }
+  
+  &:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   }
 }

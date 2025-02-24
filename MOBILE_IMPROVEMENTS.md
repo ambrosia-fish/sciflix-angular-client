@@ -10,19 +10,20 @@ This branch contains several improvements to make the Sci-Flix application more 
 - Improved touch targets for better usability on touch screens
 - Proper handling of mobile menu interactions (toggling, closing after navigation)
 
-### 2. Mobile-First Movie Browsing
-- **Implemented swipe-based movie navigation for mobile devices**
-- Added horizontal swipe gestures for intuitive browsing
-- Maintained original 2:3 movie poster aspect ratio for better viewing
-- Added visual swipe indicators and pagination dots
-- Kept desktop grid view for larger screens
-
-### 3. Mobile-Optimized Movie Cards
+### 2. Optimized Movie Cards for Mobile
 - Enhanced movie cards for better mobile display
-- Retained full-size movie posters with proper aspect ratio in swipe view
-- Center-aligned content for better readability on mobile
+- **Maintained the 2:3 aspect ratio for posters** on all devices
+- Improved poster display with `object-fit: contain` to avoid cropping
 - Increased size of buttons and touch targets
+- Adjusted font sizes and spacing for better readability
 - Disabled hover effects on touch devices to prevent "sticky hover" issues
+
+### 3. Enhanced Mobile Scrolling Grid
+- Optimized single-column layout for mobile phones
+- Added proper spacing and padding for mobile viewing
+- Centered and sized cards appropriately for different screen sizes
+- Enhanced touchscreen scrolling with better overflow behavior
+- Improved iOS scroll performance with `-webkit-overflow-scrolling: touch`
 
 ### 4. Enhanced Meta Tags
 - Added proper mobile viewport meta tags
@@ -40,30 +41,14 @@ This branch contains several improvements to make the Sci-Flix application more 
 - Enhanced button styling and spacing for mobile
 - Better typography scaling for different screen sizes 
 - Improved layout for very small screens (stacked buttons)
-- Added larger touch targets for login/signup actions
+- Added a subtle sci-fi themed grid backdrop
+- Centered content with proper mobile margins
 
 ### 7. Mobile-Friendly Search Experience
 - Optimized search bar sizing for mobile screens
 - Set font-size to 16px to prevent iOS zoom on focus
 - Added improved padding and margins for mobile
 - Increased touch target size for better usability
-
-## Before & After
-
-### Before
-The initial application had:
-- Scrolling grid layout on mobile that made browsing inefficient
-- Movie cards that didn't optimize screen space
-- Touch targets that were too small for comfortable mobile use
-- Welcome page with styling issues on mobile
-
-### After
-The mobile-optimized version features:
-- **Swipe-based navigation** that feels natural on touch devices
-- Full-size movie posters that maintain proper aspect ratio
-- Pagination dots for tracking position in movie collection
-- Properly styled welcome page with mobile-optimized layout
-- Larger touch targets for all interactive elements
 
 ## Testing
 
@@ -84,6 +69,6 @@ The mobile improvements have been designed to work on:
 ## Implementation Notes
 
 - All changes maintain backward compatibility with desktop browsers
-- The swipe behavior only activates on mobile devices (under 600px width)
-- Desktop users continue to see the traditional grid layout
-- The application maintains its sci-fi aesthetic while being much more usable on small screens
+- No functionality has been removed, only enhanced for mobile usage
+- The application maintains its sci-fi aesthetic while being more usable on small screens
+- Mobile scrolling behavior has been preserved but enhanced for better touch interaction

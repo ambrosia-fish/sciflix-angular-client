@@ -1,27 +1,84 @@
+.sci-flix-title {
+  font-family: var(--font-family-sci-fi);
+  color: var(--light-color-primary);
+  font-size: 1.5rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
 .spacer {
   flex: 1 1 auto;
 }
 
-:host ::ng-deep {
-  .mat-toolbar {
-    background-color: var(--mid-color-primary);
-    border-bottom: 1px solid rgba(74, 93, 143, 0.2);
-  }
+.mat-toolbar {
+  background-color: var(--mid-color-primary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+}
 
-  .sci-flix-title {
+/* Mobile menu button styling */
+.mobile-menu-button {
+  display: none;
+  color: var(--light-color-primary);
+}
+
+/* Mobile navigation menu */
+.mobile-nav {
+  position: fixed;
+  top: 64px; /* Height of toolbar */
+  left: 0;
+  right: 0;
+  background-color: var(--dark-color-primary);
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  z-index: 999;
+  transform: translateY(-100%);
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  
+  &.open {
+    transform: translateY(0);
+  }
+  
+  a, button {
     font-family: var(--font-family-sci-fi);
-    font-size: 1.5rem;
     color: var(--light-color-primary);
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-  }
-
-  .mat-mdc-button {
-    color: var(--light-color-primary);
-    font-family: var(--font-family-base);
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(74, 93, 143, 0.3);
     
-    &:hover {
-      background-color: rgba(74, 93, 143, 0.2);
+    &:last-child {
+      border-bottom: none;
     }
+  }
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .desktop-nav {
+    display: none;
+  }
+  
+  .mobile-menu-button {
+    display: block;
+  }
+  
+  .mat-toolbar {
+    padding: 0 1rem;
+  }
+  
+  .mobile-nav {
+    top: 56px; /* Mobile toolbar height */
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-nav {
+    display: none;
   }
 }

@@ -4,7 +4,7 @@
   </mat-card-header>
   <mat-card-content>
     <form (ngSubmit)="registerUser()">
-      <mat-form-field appearance="fill" class="form-field">
+      <mat-form-field appearance="outline" class="form-field">
         <mat-label>Username</mat-label>
         <input
           matInput
@@ -15,7 +15,7 @@
         >
         <mat-icon matSuffix>person</mat-icon>
       </mat-form-field>
-      <mat-form-field appearance="fill" class="form-field">
+      <mat-form-field appearance="outline" class="form-field">
         <mat-label>Password</mat-label>
         <input
           matInput
@@ -26,7 +26,7 @@
         >
         <mat-icon matSuffix>lock</mat-icon>
       </mat-form-field>
-      <mat-form-field appearance="fill" class="form-field">
+      <mat-form-field appearance="outline" class="form-field">
         <mat-label>Email</mat-label>
         <input
           matInput
@@ -37,7 +37,7 @@
         >
         <mat-icon matSuffix>email</mat-icon>
       </mat-form-field>
-      <mat-form-field appearance="fill" class="form-field birthdate-field">
+      <mat-form-field appearance="outline" class="form-field birthdate-field">
         <mat-label>Birthday</mat-label>
         <input
           matInput
@@ -45,7 +45,7 @@
           type="date"
           name="birthday"
         >
-        <mat-datepicker-toggle matIconSuffix></mat-datepicker-toggle>
+        <mat-icon matSuffix>event</mat-icon>
       </mat-form-field>
       <div class="signup-action-buttons">
         <button

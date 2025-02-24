@@ -79,7 +79,7 @@ button {
   }
   
   &:hover {
-    background-color: lighten(var(--accent-color), 10%);
+    background-color: rgba(74, 93, 143, 0.8); /* Lighter version of accent color */
   }
   
   &:active {

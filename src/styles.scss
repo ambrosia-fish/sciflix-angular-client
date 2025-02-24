@@ -71,6 +71,32 @@ html, body {
   border-radius: 8px !important;
 }
 
+/* Form field outlines and inputs */
+.mat-mdc-form-field.mat-mdc-form-field-type-mat-input.mat-form-field-appearance-outline,
+.mat-mdc-text-field-wrapper.mdc-text-field--outlined {
+  background-color: rgba(255, 240, 200, 0.9) !important;
+}
+
+.mat-mdc-form-field-infix {
+  background-color: transparent !important;
+}
+
+.mat-mdc-input-element, input.mat-mdc-input-element {
+  color: #000 !important;
+  font-family: var(--font-family-base) !important;
+  font-weight: 500 !important;
+  caret-color: #000 !important;
+}
+
+.mat-mdc-form-field-label, .mat-mdc-floating-label {
+  color: #5a2a2a !important;
+  font-weight: 500 !important;
+}
+
+.mat-mdc-form-field-icon-suffix .mat-icon {
+  color: #c44 !important;
+}
+
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-family-sci-fi);
@@ -115,25 +141,6 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--light-color-primary) !important;
 }
 
-/* Form Fields */
-.mat-mdc-form-field-flex {
-  background-color: rgba(255, 255, 255, 0.9) !important;
-}
-
-/* Make form inputs more readable */
-.mat-mdc-text-field-wrapper {
-  background-color: rgba(255, 255, 255, 0.9) !important;
-}
-
-.mat-mdc-input-element {
-  color: #000 !important; /* Black text for inputs */
-  background-color: rgba(255, 240, 200, 0.9) !important; /* Light yellow background for better contrast */
-}
-
-.mat-mdc-form-field-label {
-  color: #444 !important; /* Darker label color */
-}
-
 /* Fix for iOS Safari 100vh issue */
 .full-height {
   height: 100vh;
@@ -164,4 +171,19 @@ h1, h2, h3, h4, h5, h6 {
 
 .color-light {
   color: var(--light-color-primary);
+}
+
+/* MDC notched outline colors */
+.mdc-notched-outline__leading,
+.mdc-notched-outline__notch,
+.mdc-notched-outline__trailing {
+  border-color: #5a2a2a !important;
+  border-width: 2px !important;
+}
+
+.mat-mdc-form-field.mat-focused .mdc-notched-outline__leading,
+.mat-mdc-form-field.mat-focused .mdc-notched-outline__notch,
+.mat-mdc-form-field.mat-focused .mdc-notched-outline__trailing {
+  border-color: #c44 !important;
+  border-width: 2px !important;
 }

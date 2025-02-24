@@ -27,7 +27,7 @@
     aspect-ratio: 2/3;
     object-fit: cover;
     
-    /* Optimize image size for mobile */
+    /* Change aspect ratio for mobile devices */
     @media (max-width: 599px) {
       aspect-ratio: 16/9;
     }

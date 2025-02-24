@@ -29,7 +29,7 @@ export class MoviesListComponent implements OnInit {
   
   // Swipe functionality properties
   currentMovieIndex = 0;
-  swipeOffset = 0;
+  swipeOffset = '0%';
   touchStartX = 0;
   canSwipeLeft = false;
   canSwipeRight = true;
@@ -73,7 +73,7 @@ export class MoviesListComponent implements OnInit {
     
     // Reset swipe position when search results change
     this.currentMovieIndex = 0;
-    this.swipeOffset = 0;
+    this.swipeOffset = '0%';
     this.updateSwipeIndicators();
   }
   
@@ -97,18 +97,18 @@ export class MoviesListComponent implements OnInit {
       }
       
       // Update swipe offset based on current index
-      this.swipeOffset = -this.currentMovieIndex * 100 + '%';
+      this.swipeOffset = `-${this.currentMovieIndex * 100}%`;
       this.updateSwipeIndicators();
     } else {
       // Small movement - reset position
-      this.swipeOffset = -this.currentMovieIndex * 100 + '%';
+      this.swipeOffset = `-${this.currentMovieIndex * 100}%`;
     }
   }
   
   // Navigate to a specific movie by index
   goToMovie(index: number): void {
     this.currentMovieIndex = index;
-    this.swipeOffset = -this.currentMovieIndex * 100 + '%';
+    this.swipeOffset = `-${this.currentMovieIndex * 100}%`;
     this.updateSwipeIndicators();
   }
   

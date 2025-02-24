@@ -2,6 +2,11 @@
   padding: 1rem;
   max-width: 600px;
   margin: 0 auto;
+  
+  /* Better padding for mobile */
+  @media (max-width: 599px) {
+    padding: 1rem 0.75rem;
+  }
 
   ::ng-deep {
     .mat-mdc-form-field {
@@ -10,12 +15,22 @@
       .mdc-text-field--outlined {
         background-color: var(--mid-color-primary);
         border-radius: 8px;
+        
+        /* Better touch target size on mobile */
+        @media (max-width: 599px) {
+          min-height: 56px;
+        }
       }
 
       .mdc-floating-label, 
       .mdc-text-field__input {
         color: var(--light-color-primary) !important;
         font-family: var(--font-family-sci-fi) !important;
+        
+        /* Better font size for mobile */
+        @media (max-width: 599px) {
+          font-size: 16px !important; /* iOS doesn't zoom in on inputs with font-size >= 16px */
+        }
       }
 
       .mdc-notched-outline__leading,
@@ -54,7 +69,7 @@
     /* For mobile phones - single column */
     grid-template-columns: 1fr;
     gap: 1rem;
-    padding: 1rem;
+    padding: 1rem 0.75rem;
   }
   
   @media (min-width: 600px) and (max-width: 899px) {
@@ -70,5 +85,28 @@
   @media (min-width: 1200px) {
     /* For large desktops - four or more columns */
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+}
+
+/* Pull-to-refresh indicator styling */
+.refresh-indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 60px;
+  color: var(--light-color-primary);
+  font-family: var(--font-family-sci-fi);
+  font-size: 14px;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+  pointer-events: none;
+  
+  &.visible {
+    opacity: 1;
+  }
+  
+  .mat-spinner {
+    margin-right: 12px;
   }
 }

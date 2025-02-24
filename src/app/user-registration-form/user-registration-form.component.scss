@@ -1,57 +1,66 @@
-.signup-card {
-  max-width: 400px;
-  margin: 2rem auto;
-  border-radius: 8px;
-  padding: 1.5rem;
-  background-color: #25375c; /* Dark blue background */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+.signup-card, .mat-mdc-card {
+  max-width: 400px !important;
+  margin: 2rem auto !important;
+  border-radius: 8px !important;
+  padding: 1.5rem !important;
+  background-color: #25375c !important; /* Dark blue background */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
   
   @media (max-width: 599px) {
-    max-width: 90%;
-    margin: 1.5rem auto;
+    max-width: 90% !important;
+    margin: 1.5rem auto !important;
   }
 }
 
-.signup-title {
-  font-family: var(--font-family-sci-fi);
-  color: var(--light-color-primary);
-  text-align: center;
-  margin-bottom: 1.5rem;
-  font-size: 1.8rem;
+.signup-title, .mat-mdc-card-title {
+  font-family: var(--font-family-sci-fi) !important;
+  color: var(--light-color-primary) !important;
+  text-align: center !important;
+  margin-bottom: 1.5rem !important;
+  font-size: 1.8rem !important;
   
   @media (max-width: 599px) {
-    font-size: 1.5rem;
+    font-size: 1.5rem !important;
   }
 }
 
-.form-field {
-  width: 100%;
-  margin-bottom: 1rem;
+.form-field, .mat-mdc-form-field {
+  width: 100% !important;
+  margin-bottom: 1rem !important;
+  display: block !important;
   
   ::ng-deep {
     .mat-mdc-form-field-subscript-wrapper {
-      display: none;
+      display: none !important;
     }
     
     .mat-mdc-form-field-infix {
-      padding: 0.5em 0;
+      padding: 0.5em 0 !important;
     }
     
     .mat-mdc-text-field-wrapper {
-      background-color: rgba(255, 255, 255, 0.9);
-      border-radius: 4px;
+      background-color: rgba(255, 255, 255, 0.9) !important;
+      border-radius: 4px !important;
+    }
+    
+    .mat-mdc-form-field-flex {
+      background-color: rgba(255, 255, 255, 0.9) !important;
     }
     
     .mat-mdc-form-field-label {
-      color: #666;
+      color: #666 !important;
     }
     
     .mat-mdc-input-element {
-      color: #111;
+      color: #111 !important;
     }
     
     .mat-mdc-form-field-icon-suffix {
-      color: #c44;
+      color: #c44 !important;
+    }
+    
+    .mat-icon {
+      color: #c44 !important;
     }
   }
 }
@@ -59,27 +68,43 @@
 .birthdate-field {
   ::ng-deep {
     .mat-datepicker-toggle {
-      color: #999;
+      color: #999 !important;
+    }
+    
+    .mat-datepicker-toggle-default-icon {
+      color: #777 !important;
     }
   }
 }
 
-.signup-action-buttons {
-  display: flex;
-  justify-content: center;
-  margin-top: 1.5rem;
+.signup-action-buttons, form button {
+  display: flex !important;
+  justify-content: center !important;
+  margin-top: 1.5rem !important;
   
-  button {
-    min-width: 120px;
-    padding: 0.75rem 1.5rem;
-    font-family: var(--font-family-sci-fi);
-    background-color: #6a2ca0; /* Purple button */
-    color: white;
-    border: none;
-    border-radius: 4px;
+  button, .mat-mdc-raised-button {
+    min-width: 120px !important;
+    padding: 0.75rem 1.5rem !important;
+    font-family: var(--font-family-sci-fi) !important;
+    background-color: #6a2ca0 !important; /* Purple button */
+    color: white !important;
+    border: none !important;
+    border-radius: 4px !important;
     
     &:hover {
-      background-color: #7a3cb0;
+      background-color: #7a3cb0 !important;
     }
+  }
+}
+
+/* Override Material button styles */
+::ng-deep {
+  .mat-mdc-card-actions .mat-mdc-button.mat-mdc-button-base,
+  .mat-mdc-card-actions .mat-mdc-raised-button.mat-mdc-button-base,
+  .mat-mdc-raised-button:not(:disabled) {
+    background-color: #6a2ca0 !important;
+    color: white !important;
+    font-family: var(--font-family-sci-fi) !important;
+    padding: 0.75rem 1.5rem !important;
   }
 }

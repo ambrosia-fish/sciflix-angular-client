@@ -19,7 +19,7 @@ This branch contains several improvements to make the Sci-Flix application more 
 
 ### 3. Mobile-Optimized Movie Cards
 - Enhanced movie cards for better mobile display
-- Changed aspect ratio for movie posters on mobile (16:9 instead of 2:3)
+- **Changed aspect ratio for movie posters on mobile (16:9 instead of 2:3)**
 - Increased size of buttons and touch targets
 - Adjusted font sizes and spacing for better readability
 - Disabled hover effects on touch devices to prevent "sticky hover" issues
@@ -35,6 +35,34 @@ This branch contains several improvements to make the Sci-Flix application more 
 - Created helper classes for showing/hiding elements based on screen size
 - Improved touch targets across the application
 - Added fix for iOS Safari 100vh issue
+
+### 6. Improved Welcome Page
+- Enhanced button sizing and spacing for mobile
+- Better typography scaling for different screen sizes 
+- Improved layout for very small screens (stacked buttons)
+- Added larger touch targets for login/signup actions
+
+### 7. Mobile-Friendly Search Experience
+- Optimized search bar sizing for mobile screens
+- Set font-size to 16px to prevent iOS zoom on focus
+- Added improved padding and margins for mobile
+- Increased touch target size for better usability
+
+## Before & After Screenshots
+
+### Before
+The initial application had fixed layouts that didn't adapt well to mobile screens:
+- Movie posters were in 2:3 aspect ratio which took up too much vertical space
+- Touch targets were too small for comfortable mobile use
+- Search bar wasn't optimized for mobile inputs
+
+### After
+The mobile-optimized version features:
+- 16:9 poster aspect ratio on mobile for better screen real estate usage
+- Larger touch targets for all interactive elements
+- Mobile-friendly navigation with hamburger menu
+- Single-column layout for movie cards on phones
+- Better spacing and typography for small screens
 
 ## Testing
 

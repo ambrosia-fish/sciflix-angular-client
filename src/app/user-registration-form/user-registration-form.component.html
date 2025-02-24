@@ -1,55 +1,60 @@
-<mat-card>
-    <mat-card-header>
-      <mat-card-title>Sign Up!</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <form (ngSubmit)="registerUser()">
-        <mat-form-field appearance="fill">
-          <mat-label>Username</mat-label>
-          <input
-            matInput
-            [(ngModel)]="userData.username"
-            type="text"
-            name="username"
-            required
-          >
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>Password</mat-label>
-          <input
-            matInput
-            [(ngModel)]="userData.password"
-            type="password"
-            name="password"
-            required
-          >
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>Email</mat-label>
-          <input
-            matInput
-            [(ngModel)]="userData.email"
-            type="email"
-            name="email"
-            required
-          >
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>Birthday</mat-label>
-          <input
-            matInput
-            [(ngModel)]="userData.birthday"
-            type="date"
-            name="birthday"
-          >
-        </mat-form-field>
+<mat-card class="signup-card">
+  <mat-card-header>
+    <mat-card-title class="signup-title">Sign Up!</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form (ngSubmit)="registerUser()">
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Username</mat-label>
+        <input
+          matInput
+          [(ngModel)]="userData.username"
+          type="text"
+          name="username"
+          required
+        >
+        <mat-icon matSuffix>person</mat-icon>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          [(ngModel)]="userData.password"
+          type="password"
+          name="password"
+          required
+        >
+        <mat-icon matSuffix>lock</mat-icon>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          [(ngModel)]="userData.email"
+          type="email"
+          name="email"
+          required
+        >
+        <mat-icon matSuffix>email</mat-icon>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="form-field birthdate-field">
+        <mat-label>Birthday</mat-label>
+        <input
+          matInput
+          [(ngModel)]="userData.birthday"
+          type="date"
+          name="birthday"
+        >
+        <mat-datepicker-toggle matIconSuffix></mat-datepicker-toggle>
+      </mat-form-field>
+      <div class="signup-action-buttons">
         <button
           mat-raised-button
           type="submit"
-          color="primary"
         >
           Sign Up
         </button>
-      </form>
-    </mat-card-content>
-  </mat-card>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

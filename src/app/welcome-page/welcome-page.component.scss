@@ -43,7 +43,7 @@
   }
 }
 
-.actions-container {
+.actions-container, .button-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -54,31 +54,76 @@
   max-width: 280px;
 }
 
-button {
-  width: 100%;
-  padding: 1rem 0;
-  font-family: var(--font-family-sci-fi);
-  font-size: 1.25rem;
-  border: none;
-  background-color: #314670; /* Dark blue buttons */
-  color: var(--light-color-primary);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  border-radius: 6px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+button, .mat-mdc-raised-button {
+  width: 100% !important;
+  padding: 1rem 0 !important;
+  font-family: var(--font-family-sci-fi) !important;
+  font-size: 1.25rem !important;
+  border: none !important;
+  background-color: #25375c !important; /* Dark blue buttons */
+  color: var(--light-color-primary) !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  border-radius: 6px !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3) !important;
   
   /* Larger touch targets on mobile */
   @media (max-width: 599px) {
-    padding: 1rem 0;
-    font-size: 1.2rem;
+    padding: 1rem 0 !important;
+    font-size: 1.2rem !important;
   }
   
   &:hover {
-    background-color: #4a5d8f; /* Lighter blue on hover */
+    background-color: #314670 !important; /* Lighter blue on hover */
   }
   
   &:active {
-    transform: translateY(1px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    transform: translateY(1px) !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+  }
+}
+
+/* Fix for main-page styling */
+.main-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+  background-color: var(--dark-color-primary);
+  position: relative;
+  overflow: hidden;
+  
+  /* Create a subtle sci-fi grid backdrop */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      linear-gradient(rgba(74, 93, 143, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(74, 93, 143, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: 1;
+    pointer-events: none;
+  }
+  
+  h1 {
+    font-family: var(--font-family-sci-fi);
+    color: var(--light-color-primary);
+    font-size: 3.5rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    text-shadow: 0 0 15px rgba(215, 224, 234, 0.5);
+    line-height: 1.2;
+    z-index: 2;
+    
+    @media (max-width: 599px) {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+    }
   }
 }

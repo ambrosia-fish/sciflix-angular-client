@@ -39,20 +39,20 @@
     }
     
     .mat-mdc-text-field-wrapper {
-      background-color: rgba(255, 255, 255, 0.9) !important;
+      background-color: rgba(255, 240, 200, 0.9) !important;
       border-radius: 4px !important;
     }
     
     .mat-mdc-form-field-flex {
-      background-color: rgba(255, 255, 255, 0.9) !important;
+      background-color: rgba(255, 240, 200, 0.9) !important;
     }
     
     .mat-mdc-form-field-label {
-      color: #666 !important;
+      color: #444 !important;
     }
     
     .mat-mdc-input-element {
-      color: #111 !important;
+      color: #000 !important;
     }
     
     .mat-mdc-form-field-icon-suffix {
@@ -74,13 +74,13 @@
     min-width: 120px !important;
     padding: 0.75rem 1.5rem !important;
     font-family: var(--font-family-sci-fi) !important;
-    background-color: #6a2ca0 !important; /* Purple button */
+    background-color: #25375c !important; /* Dark blue button */
     color: white !important;
     border: none !important;
     border-radius: 4px !important;
     
     &:hover {
-      background-color: #7a3cb0 !important;
+      background-color: #314670 !important; /* Lighter blue on hover */
     }
   }
 }
@@ -90,7 +90,7 @@
   .mat-mdc-card-actions .mat-mdc-button.mat-mdc-button-base,
   .mat-mdc-card-actions .mat-mdc-raised-button.mat-mdc-button-base,
   .mat-mdc-raised-button:not(:disabled) {
-    background-color: #6a2ca0 !important;
+    background-color: #25375c !important; /* Dark blue button */
     color: white !important;
     font-family: var(--font-family-sci-fi) !important;
     padding: 0.75rem 1.5rem !important;

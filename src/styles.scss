@@ -9,6 +9,11 @@
   --accent-color: #4a5d8f;
   --font-family-base: 'Roboto', sans-serif;
   --font-family-sci-fi: 'Orbitron', sans-serif;
+  
+  /* Responsive breakpoints */
+  --mobile-width: 599px;
+  --tablet-width: 900px;
+  --desktop-width: 1200px;
 }
 
 /* Reset and Base Styles */
@@ -18,6 +23,12 @@ html, body {
   padding: 0;
   background-color: var(--dark-color-primary);
   color: var(--light-color-primary);
+  font-size: 16px;
+  
+  /* Better font size for mobile readability */
+  @media (max-width: 599px) {
+    font-size: 14px;
+  }
 }
 
 /* Material Overrides */
@@ -54,6 +65,13 @@ h1, h2, h3, h4, h5, h6 {
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 1.5rem;
   padding: 1.5rem;
+  
+  /* Responsive adjustments */
+  @media (max-width: 599px) {
+    gap: 1rem;
+    padding: 1rem;
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Material Card Overrides */
@@ -93,4 +111,70 @@ h1, h2, h3, h4, h5, h6 {
 
 .color-light {
   color: var(--light-color-primary);
+}
+
+/* Responsive Utility Classes */
+.hide-on-mobile {
+  @media (max-width: 599px) {
+    display: none !important;
+  }
+}
+
+.hide-on-tablet {
+  @media (min-width: 600px) and (max-width: 899px) {
+    display: none !important;
+  }
+}
+
+.hide-on-desktop {
+  @media (min-width: 900px) {
+    display: none !important;
+  }
+}
+
+.show-on-mobile {
+  @media (min-width: 600px) {
+    display: none !important;
+  }
+}
+
+.show-on-tablet {
+  display: none !important;
+  @media (min-width: 600px) and (max-width: 899px) {
+    display: block !important;
+  }
+}
+
+.show-on-desktop {
+  display: none !important;
+  @media (min-width: 900px) {
+    display: block !important;
+  }
+}
+
+/* Improved touch targets for mobile */
+@media (max-width: 599px) {
+  .mat-mdc-button, 
+  .mat-mdc-icon-button,
+  .mat-mdc-raised-button {
+    min-width: 44px;
+    min-height: 44px;
+    
+    .mat-icon {
+      font-size: 24px;
+      width: 24px;
+      height: 24px;
+    }
+  }
+  
+  .mat-mdc-form-field {
+    font-size: 16px;
+  }
+}
+
+/* Fix for iOS Safari 100vh issue */
+.full-height {
+  height: 100vh;
+  height: -webkit-fill-available;
+  height: fill-available;
 }

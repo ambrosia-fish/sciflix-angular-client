@@ -31,10 +31,44 @@ html, body {
   }
 }
 
+/* Welcome Page Buttons (High specificity) */
+.welcome-container button.mat-mdc-raised-button,
+.main-page button.mat-mdc-raised-button,
+.button-container button.mat-mdc-raised-button {
+  background-color: #25375c !important;
+  color: white !important;
+  font-family: var(--font-family-sci-fi) !important;
+  width: 100% !important;
+  max-width: 280px !important;
+  padding: 1rem !important;
+  margin: 0.5rem 0 !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3) !important;
+  border-radius: 6px !important;
+  text-transform: none !important;
+  font-size: 1.25rem !important;
+}
+
+/* Login and Registration Form Buttons */
+.login-card button.mat-mdc-raised-button,
+.signup-card button.mat-mdc-raised-button,
+.mat-mdc-dialog-container button.mat-mdc-raised-button {
+  background-color: #6a2ca0 !important;
+  color: white !important;
+  font-family: var(--font-family-sci-fi) !important;
+  border-radius: 4px !important;
+  padding: 0.75rem 1.5rem !important;
+}
+
 /* Material Overrides */
 .mat-mdc-card {
   background-color: var(--mid-color-primary) !important;
   color: var(--light-color-primary) !important;
+}
+
+/* Card styles for dialogs */
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  background-color: #25375c !important;
+  border-radius: 8px !important;
 }
 
 /* Typography */
@@ -65,13 +99,6 @@ h1, h2, h3, h4, h5, h6 {
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 1.5rem;
   padding: 1.5rem;
-  
-  /* Responsive adjustments */
-  @media (max-width: 599px) {
-    gap: 1rem;
-    padding: 1rem;
-    grid-template-columns: 1fr;
-  }
 }
 
 /* Material Card Overrides */
@@ -113,63 +140,9 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--light-color-primary);
 }
 
-/* Responsive Utility Classes */
-.hide-on-mobile {
-  @media (max-width: 599px) {
-    display: none !important;
-  }
-}
-
-.hide-on-tablet {
-  @media (min-width: 600px) and (max-width: 899px) {
-    display: none !important;
-  }
-}
-
-.hide-on-desktop {
-  @media (min-width: 900px) {
-    display: none !important;
-  }
-}
-
-.show-on-mobile {
-  @media (min-width: 600px) {
-    display: none !important;
-  }
-}
-
-.show-on-tablet {
-  display: none !important;
-  @media (min-width: 600px) and (max-width: 899px) {
-    display: block !important;
-  }
-}
-
-.show-on-desktop {
-  display: none !important;
-  @media (min-width: 900px) {
-    display: block !important;
-  }
-}
-
-/* Improved touch targets for mobile */
-@media (max-width: 599px) {
-  .mat-mdc-button, 
-  .mat-mdc-icon-button,
-  .mat-mdc-raised-button {
-    min-width: 44px;
-    min-height: 44px;
-    
-    .mat-icon {
-      font-size: 24px;
-      width: 24px;
-      height: 24px;
-    }
-  }
-  
-  .mat-mdc-form-field {
-    font-size: 16px;
-  }
+/* Form Fields */
+.mat-mdc-form-field-flex {
+  background-color: rgba(255, 255, 255, 0.9) !important;
 }
 
 /* Fix for iOS Safari 100vh issue */

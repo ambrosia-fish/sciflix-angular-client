@@ -1,7 +1,27 @@
 <mat-toolbar>
   <span class="sci-flix-title">Sci-Flix</span>
   <span class="spacer"></span>
-  <a mat-button routerLink="/movies">Home</a>
-  <a mat-button routerLink="/user-profile">Profile</a>
-  <button mat-button (click)="onLogout()">Logout</button>
+  
+  <!-- Desktop Navigation Links -->
+  <div class="desktop-nav">
+    <a mat-button routerLink="/movies">Home</a>
+    <a mat-button routerLink="/user-profile">Profile</a>
+    <button mat-button (click)="onLogout()">Logout</button>
+  </div>
+  
+  <!-- Mobile Menu Button -->
+  <button 
+    class="mobile-menu-button" 
+    mat-icon-button 
+    (click)="toggleMobileMenu()" 
+    aria-label="Toggle navigation menu">
+    <mat-icon>{{ isMobileMenuOpen ? 'close' : 'menu' }}</mat-icon>
+  </button>
 </mat-toolbar>
+
+<!-- Mobile Navigation Menu -->
+<div class="mobile-nav" [class.open]="isMobileMenuOpen">
+  <a mat-button routerLink="/movies" (click)="closeMobileMenu()">Home</a>
+  <a mat-button routerLink="/user-profile" (click)="closeMobileMenu()">Profile</a>
+  <button mat-button (click)="onLogoutMobile()">Logout</button>
+</div>

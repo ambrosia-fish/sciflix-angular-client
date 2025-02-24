@@ -52,7 +52,7 @@ html, body {
 .login-card button.mat-mdc-raised-button,
 .signup-card button.mat-mdc-raised-button,
 .mat-mdc-dialog-container button.mat-mdc-raised-button {
-  background-color: #6a2ca0 !important;
+  background-color: #25375c !important; /* Match dark blue instead of purple */
   color: white !important;
   font-family: var(--font-family-sci-fi) !important;
   border-radius: 4px !important;
@@ -115,6 +115,32 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--light-color-primary) !important;
 }
 
+/* Form Fields */
+.mat-mdc-form-field-flex {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* Make form inputs more readable */
+.mat-mdc-text-field-wrapper {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.mat-mdc-input-element {
+  color: #000 !important; /* Black text for inputs */
+  background-color: rgba(255, 240, 200, 0.9) !important; /* Light yellow background for better contrast */
+}
+
+.mat-mdc-form-field-label {
+  color: #444 !important; /* Darker label color */
+}
+
+/* Fix for iOS Safari 100vh issue */
+.full-height {
+  height: 100vh;
+  height: -webkit-fill-available;
+  height: fill-available;
+}
+
 /* Utility Classes */
 .text-sci-fi {
   font-family: var(--font-family-sci-fi) !important;
@@ -138,16 +164,4 @@ h1, h2, h3, h4, h5, h6 {
 
 .color-light {
   color: var(--light-color-primary);
-}
-
-/* Form Fields */
-.mat-mdc-form-field-flex {
-  background-color: rgba(255, 255, 255, 0.9) !important;
-}
-
-/* Fix for iOS Safari 100vh issue */
-.full-height {
-  height: 100vh;
-  height: -webkit-fill-available;
-  height: fill-available;
 }

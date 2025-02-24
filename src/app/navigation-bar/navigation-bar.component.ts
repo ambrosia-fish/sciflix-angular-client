@@ -1,23 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from '../services/user.service';
+import { RouterModule } from '@angular/router';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { CommonModule } from '@angular/common';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-navigation-bar',
+  standalone: true,
+  imports: [RouterModule, MatToolbarModule, MatButtonModule, MatIconModule, CommonModule],
   templateUrl: './navigation-bar.component.html',
   styleUrls: ['./navigation-bar.component.scss']
 })
 export class NavigationBarComponent {
+  @Input() isLoggedIn: boolean = false;
+  @Output() logout = new EventEmitter<void>();
+  
   isMobileMenuOpen = false;
-
-  constructor(
-    private router: Router,
-    private userService: UserService
-  ) { }
+  
+  private router = inject(Router);
+  private authService = inject(AuthService);
 
   onLogout(): void {
-    this.userService.clearUser();
-    this.router.navigate(['/welcome']);
+    this.logout.emit();
+    this.authService.logout();
   }
 
   onLogoutMobile(): void {

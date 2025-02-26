@@ -31,7 +31,16 @@
   margin-bottom: 1.25rem;
 }
 
+.date-field-container {
+  margin-bottom: 1.25rem;
+  width: 100%;
+}
+
 .form-field {
+  width: 100%;
+}
+
+.birthdate-field {
   width: 100%;
 }
 
@@ -73,6 +82,14 @@
     .mat-mdc-form-field-infix {
       width: 100% !important;
       min-width: 200px !important;
+    }
+    
+    // Special fix for the date input field
+    input.mat-mdc-input-element {
+      width: 100% !important;
+      min-width: 100% !important;
+      position: relative !important;
+      box-sizing: border-box !important;
     }
   }
 }

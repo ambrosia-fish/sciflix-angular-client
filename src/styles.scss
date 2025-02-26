@@ -14,6 +14,7 @@
   --warning-color: #ffa000;
   --font-family-base: 'Roboto', sans-serif;
   --font-family-sci-fi: 'Orbitron', sans-serif;
+  --field-bg-color: rgba(30, 41, 59, 0.8);
   
   /* Responsive breakpoints */
   --mobile-width: 599px;
@@ -36,43 +37,42 @@ html, body {
   }
 }
 
-/* CRITICAL FIX for field backgrounds extending beyond their containers */
-.mat-mdc-form-field {
-  display: inline-block !important;
-  border-radius: 4px !important;
-  position: relative !important;
-  text-align: left !important;
+/* ======== CRITICAL INPUT FIELD FIXES ======== */
+/* Remove the yellow/cream background for ALL input fields */
+.mat-mdc-input-element,
+input.mat-mdc-input-element,
+.mat-mdc-form-field input,
+.mat-mdc-form-field textarea,
+.mat-mdc-form-field-flex {
+  background-color: rgba(30, 41, 59, 0.8) !important;
 }
 
+/* Force contained inputs */
+.mdc-text-field--outlined {
+  border-radius: 4px !important;
+  overflow: hidden !important;
+}
+
+/* Completely style the input field texture */
 .mat-mdc-text-field-wrapper {
-  position: relative !important;
-  display: inline-flex !important;
-  width: 100% !important;
-  box-sizing: border-box !important;
-  overflow: hidden !important;
+  background-color: rgba(30, 41, 59, 0.8) !important;
   border-radius: 4px !important;
+  overflow: hidden !important;
 }
 
+/* CRITICAL: target the actual input background */
 .mdc-text-field {
+  background-color: rgba(30, 41, 59, 0.8) !important;
   border-radius: 4px !important;
   overflow: hidden !important;
 }
 
-.mdc-notched-outline__leading, 
-.mdc-notched-outline__notch, 
-.mdc-notched-outline__trailing {
-  border-radius: 0 !important;
+/* Direct selector for the yellow background - force override */
+.mat-mdc-form-field-infix {
+  background-color: transparent !important;
 }
 
-/* Specific fix for search bar */
-.search-container .mat-mdc-form-field,
-.search-container .mat-mdc-text-field-wrapper,
-.search-container .mdc-text-field {
-  overflow: hidden !important;
-  border-radius: 4px !important;
-}
-
-/* Welcome Page Buttons (High specificity) */
+/* ======== WELCOME PAGE STYLES ======== */
 .welcome-container button.mat-mdc-raised-button,
 .main-page button.mat-mdc-raised-button,
 .button-container button.mat-mdc-raised-button {
@@ -92,7 +92,7 @@ html, body {
   justify-content: center !important;
 }
 
-/* Login and Registration Form Buttons - NO GRADIENTS */
+/* ======== FORM BUTTONS ======== */
 .login-card button.mat-mdc-raised-button,
 .signup-card button.mat-mdc-raised-button,
 .mat-mdc-dialog-container button.mat-mdc-raised-button {
@@ -104,26 +104,23 @@ html, body {
   transition: background-color 0.2s ease !important;
 }
 
-/* Button hover states WITHOUT gradients */
 .login-card button.mat-mdc-raised-button:hover,
 .signup-card button.mat-mdc-raised-button:hover,
 .mat-mdc-dialog-container button.mat-mdc-raised-button:hover {
   background-color: var(--accent-light) !important;
 }
 
-/* Material Overrides */
+/* ======== MATERIAL OVERRIDES ======== */
 .mat-mdc-card {
   background-color: var(--mid-color-primary) !important;
   color: var(--light-color-primary) !important;
 }
 
-/* Card styles for dialogs */
 .mat-mdc-dialog-container .mdc-dialog__surface {
   background-color: #25375c !important;
   border-radius: 12px !important;
 }
 
-/* Mobile-friendly dialog */
 .mobile-friendly-dialog .mat-mdc-dialog-container {
   padding: 16px !important;
 }
@@ -134,17 +131,7 @@ html, body {
   }
 }
 
-/* Form field outlines and inputs */
-.mat-mdc-form-field.mat-mdc-form-field-type-mat-input.mat-form-field-appearance-outline,
-.mat-mdc-text-field-wrapper.mdc-text-field--outlined {
-  background-color: rgba(30, 41, 59, 0.8) !important;
-  border-radius: 4px !important;
-}
-
-.mat-mdc-form-field-infix {
-  background-color: transparent !important;
-}
-
+/* ======== FORM FIELDS ======== */
 .mat-mdc-input-element, input.mat-mdc-input-element {
   color: white !important;
   font-family: var(--font-family-base) !important;
@@ -161,14 +148,23 @@ html, body {
   color: rgba(255, 255, 255, 0.7) !important;
 }
 
-/* Typography */
+/* ======== TYPOGRAPHY ======== */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-family-sci-fi);
   margin: 0;
   padding: 0;
 }
 
-/* Movie Card Specific Overrides */
+.text-sci-fi {
+  font-family: var(--font-family-sci-fi) !important;
+}
+
+.mat-mdc-card-title {
+  font-family: var(--font-family-sci-fi) !important;
+  color: var(--light-color-primary) !important;
+}
+
+/* ======== MOVIE SPECIFIC STYLES ======== */
 .movie-title {
   font-family: var(--font-family-sci-fi) !important;
 }
@@ -183,7 +179,6 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--accent-color) !important;
 }
 
-/* Movie Cards Grid */
 .movie-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -191,7 +186,6 @@ h1, h2, h3, h4, h5, h6 {
   padding: 1.5rem;
 }
 
-/* Material Card Overrides */
 .mat-mdc-card-content {
   padding: 16px !important;
 }
@@ -200,21 +194,11 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-family-sci-fi) !important;
 }
 
-.mat-mdc-card-title {
-  font-family: var(--font-family-sci-fi) !important;
-  color: var(--light-color-primary) !important;
-}
-
-/* Fix for iOS Safari 100vh issue */
+/* ======== UTILITIES ======== */
 .full-height {
   height: 100vh;
   height: -webkit-fill-available;
   height: fill-available;
-}
-
-/* Utility Classes */
-.text-sci-fi {
-  font-family: var(--font-family-sci-fi) !important;
 }
 
 .text-glow {
@@ -237,7 +221,7 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--light-color-primary);
 }
 
-/* MDC notched outline colors */
+/* ======== OUTLINES ======== */
 .mdc-notched-outline__leading,
 .mdc-notched-outline__notch,
 .mdc-notched-outline__trailing {
@@ -252,34 +236,26 @@ h1, h2, h3, h4, h5, h6 {
   border-width: 2px !important;
 }
 
-/* Snackbar customization */
-.success-snackbar {
+/* ======== MESSAGES ======== */
+.success-snackbar, .success-snackbar .mdc-snackbar__surface {
   background-color: var(--success-color) !important;
   color: white !important;
-}
-
-.success-snackbar .mdc-snackbar__surface {
-  background-color: var(--success-color) !important;
 }
 
 .success-snackbar .mat-mdc-button {
   color: white !important;
 }
 
-.error-snackbar {
+.error-snackbar, .error-snackbar .mdc-snackbar__surface {
   background-color: var(--error-color) !important;
   color: white !important;
-}
-
-.error-snackbar .mdc-snackbar__surface {
-  background-color: var(--error-color) !important;
 }
 
 .error-snackbar .mat-mdc-button {
   color: white !important;
 }
 
-/* Better tap/touch feedback for mobile */
+/* ======== MOBILE OPTIMIZATIONS ======== */
 @media (max-width: 599px) {
   .mat-mdc-button,
   .mat-mdc-raised-button {
@@ -292,7 +268,6 @@ h1, h2, h3, h4, h5, h6 {
     transition: transform 0.1s !important;
   }
   
-  /* Better touch areas in general */
   .mat-mdc-form-field-infix {
     min-height: 48px !important;
   }
@@ -305,7 +280,13 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-/* Hide all validation errors by default */
+/* ======== CRITICAL OVERRIDES ======== */
+/* Hide validation errors by default */
 .mat-error {
   display: none !important;
+}
+
+/* Force dark background for all form fields */
+input, textarea, select, .mat-mdc-input-element {
+  background-color: rgba(30, 41, 59, 0.8) !important;
 }

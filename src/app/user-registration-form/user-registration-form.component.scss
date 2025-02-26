@@ -1,12 +1,13 @@
 .signup-card, .mat-mdc-card {
   max-width: 400px !important;
-  width: 95% !important; /* Add width to ensure it's not too skinny on desktop */
+  width: 95% !important;
   margin: 2rem auto !important;
   border-radius: 12px !important;
   padding: 1.75rem !important;
-  background-color: #25375c !important; /* Dark blue background */
+  background-color: #25375c !important;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4) !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  overflow: hidden !important; /* Add overflow hidden to contain everything */
   
   @media (max-width: 599px) {
     max-width: 90% !important;
@@ -15,7 +16,7 @@
   }
   
   @media (min-width: 1200px) {
-    max-width: 450px !important; /* Slightly wider on large screens */
+    max-width: 450px !important;
     padding: 2rem !important;
   }
 }
@@ -53,7 +54,15 @@
     
     .mat-mdc-form-field-infix {
       padding: 0.5em 0 !important;
-      min-height: 48px !important; /* More touch-friendly height */
+      min-height: 48px !important;
+    }
+    
+    /* Override outlines completely */
+    .mdc-notched-outline__leading,
+    .mdc-notched-outline__notch,
+    .mdc-notched-outline__trailing {
+      border-color: transparent !important;
+      border-width: 0 !important;
     }
     
     /* Fix for background extending issue */
@@ -63,10 +72,11 @@
     }
     
     .mat-mdc-text-field-wrapper {
-      background-color: rgba(30, 41, 59, 0.8) !important; /* Darker, more subtle color */
+      background-color: rgba(30, 41, 59, 0.8) !important;
       border-radius: 8px !important;
       transition: background-color 0.2s ease !important;
-      overflow: hidden !important; /* Fix for background extending */
+      overflow: hidden !important;
+      border: 1px solid rgba(111, 140, 199, 0.4) !important; /* Add light border */
       
       &:hover {
         background-color: rgba(39, 53, 76, 0.9) !important;
@@ -84,7 +94,7 @@
     
     .mat-mdc-input-element {
       color: white !important;
-      font-size: 16px !important; /* Prevent zoom on iOS */
+      font-size: 16px !important;
       caret-color: var(--accent-light) !important;
     }
     
@@ -96,12 +106,13 @@
       color: rgba(255, 255, 255, 0.7) !important;
     }
     
+    /* Hide error messages from top */
+    .mat-mdc-form-field-error-wrapper {
+      display: none !important;
+    }
+    
     .mat-mdc-form-field-error {
-      color: #ff6b6b !important;
-      font-size: 12px !important;
-      margin-top: 0.25rem !important;
-      font-weight: 400 !important;
-      letter-spacing: 0.2px !important;
+      display: none !important;
     }
     
     /* Improve focus states for better mobile UX */
@@ -109,8 +120,13 @@
       .mdc-notched-outline__leading,
       .mdc-notched-outline__notch,
       .mdc-notched-outline__trailing {
-        border-color: var(--accent-light) !important;
-        border-width: 2px !important;
+        border-color: transparent !important;
+        border-width: 0 !important;
+      }
+      
+      .mat-mdc-text-field-wrapper {
+        border: 1px solid #6f8cc7 !important; /* Highlight focused field */
+        box-shadow: 0 0 8px rgba(111, 140, 199, 0.4) !important;
       }
     }
   }
@@ -146,59 +162,62 @@
   display: flex !important;
   justify-content: center !important;
   margin-top: 2rem !important;
+  margin-bottom: 1rem !important;
+}
+
+button.submit-button, button.mat-mdc-raised-button {
+  min-width: 200px !important;
+  width: 70% !important;
+  height: 48px !important;
+  padding: 0.75rem 1.5rem !important;
+  font-family: var(--font-family-sci-fi) !important;
+  background-color: #4a5d8f !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 50px !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  letter-spacing: 1px !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+  text-transform: uppercase !important;
+  position: relative !important;
+  overflow: hidden !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   
-  button, .mat-mdc-raised-button {
-    min-width: 120px !important;
-    width: 70% !important; /* Not full width to look more like a button */
-    padding: 0.75rem 1.5rem !important;
-    font-family: var(--font-family-sci-fi) !important;
-    background-color: var(--accent-color) !important; /* Use accent color */
-    color: white !important;
-    border: none !important;
-    border-radius: 50px !important; /* Rounded corners for button-like appearance */
-    font-size: 16px !important;
-    font-weight: 500 !important;
-    letter-spacing: 1px !important;
-    transition: all 0.2s ease !important;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important; /* Strong shadow for 3D effect */
-    text-transform: uppercase !important; /* Make it more button-like */
-    position: relative !important;
-    overflow: hidden !important;
-    
-    /* Button glow effect */
-    &::before {
-      content: '' !important;
-      position: absolute !important;
-      top: 0 !important;
-      left: 0 !important;
-      width: 100% !important;
-      height: 100% !important;
-      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), transparent) !important;
-      opacity: 0.8 !important;
-    }
-    
-    @media (max-width: 599px) {
-      min-height: 48px !important; /* Better touch target */
-      width: 100% !important; /* Full width on mobile */
-    }
-    
-    @media (min-width: 1200px) {
-      max-width: 200px !important; /* Not full width on desktop */
-      font-size: 18px !important;
-    }
-    
-    &:hover {
-      background-color: var(--accent-light) !important;
-      transform: translateY(-2px) !important;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4) !important;
-    }
-    
-    &:disabled {
-      background-color: rgba(37, 55, 92, 0.5) !important;
-      color: rgba(255, 255, 255, 0.5) !important;
-      transform: none !important;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2) !important;
-    }
+  /* Button glow effect */
+  &::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 50% !important;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), transparent) !important;
+    opacity: 1 !important;
+  }
+  
+  @media (max-width: 599px) {
+    width: 100% !important; /* Full width on mobile */
+  }
+  
+  @media (min-width: 1200px) {
+    max-width: 200px !important;
+    font-size: 18px !important;
+  }
+  
+  &:hover {
+    background-color: #6f8cc7 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4) !important;
+  }
+  
+  &:disabled {
+    background-color: rgba(37, 55, 92, 0.5) !important;
+    color: rgba(255, 255, 255, 0.5) !important;
+    transform: none !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2) !important;
   }
 }
 
@@ -211,10 +230,9 @@
   }
 }
 
-.submit-button {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
+/* Add direct style for error message to hide it */
+mat-error, .mat-error {
+  display: none !important;
 }
 
 /* Override Material button styles */
@@ -222,7 +240,7 @@
   .mat-mdc-card-actions .mat-mdc-button.mat-mdc-button-base,
   .mat-mdc-card-actions .mat-mdc-raised-button.mat-mdc-button-base,
   .mat-mdc-raised-button:not(:disabled) {
-    background-color: var(--accent-color) !important;
+    background-color: #4a5d8f !important;
     color: white !important;
     font-family: var(--font-family-sci-fi) !important;
     padding: 0.75rem 1.5rem !important;

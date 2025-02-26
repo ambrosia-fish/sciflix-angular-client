@@ -1,15 +1,16 @@
 .login-card, .mat-mdc-card {
   max-width: 400px !important;
   margin: 2rem auto !important;
-  border-radius: 8px !important;
-  padding: 1.5rem !important;
+  border-radius: 12px !important;
+  padding: 1.75rem !important;
   background-color: #25375c !important; /* Dark blue background */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
   
   @media (max-width: 599px) {
     max-width: 90% !important;
     margin: 1rem auto !important;
-    padding: 1rem !important;
+    padding: 1.25rem !important;
   }
 }
 
@@ -17,18 +18,19 @@
   font-family: var(--font-family-sci-fi) !important;
   color: var(--light-color-primary) !important;
   text-align: center !important;
-  margin-bottom: 1.5rem !important;
+  margin-bottom: 1.75rem !important;
   font-size: 1.8rem !important;
+  letter-spacing: 1px !important;
   
   @media (max-width: 599px) {
     font-size: 1.5rem !important;
-    margin-bottom: 1rem !important;
+    margin-bottom: 1.25rem !important;
   }
 }
 
 .form-field, .mat-mdc-form-field {
   width: 100% !important;
-  margin-bottom: 1rem !important;
+  margin-bottom: 1.25rem !important;
   display: block !important;
   
   ::ng-deep {
@@ -44,35 +46,44 @@
     }
     
     .mat-mdc-text-field-wrapper {
-      background-color: rgba(255, 240, 200, 0.9) !important;
-      border-radius: 4px !important;
+      background-color: rgba(30, 41, 59, 0.8) !important; /* Darker, more subtle color */
+      border-radius: 8px !important;
+      transition: background-color 0.2s ease !important;
+      
+      &:hover {
+        background-color: rgba(39, 53, 76, 0.9) !important;
+      }
     }
     
     .mat-mdc-form-field-flex {
-      background-color: rgba(255, 240, 200, 0.9) !important;
+      background-color: transparent !important;
     }
     
     .mat-mdc-form-field-label {
-      color: #444 !important;
+      color: rgba(255, 255, 255, 0.7) !important;
+      font-weight: 400 !important;
     }
     
     .mat-mdc-input-element {
-      color: #000 !important;
+      color: white !important;
       font-size: 16px !important; /* Prevent zoom on iOS */
+      caret-color: var(--accent-light) !important;
     }
     
     .mat-mdc-form-field-icon-suffix {
-      color: #c44 !important;
+      color: rgba(255, 255, 255, 0.7) !important;
     }
     
     .mat-icon {
-      color: #c44 !important;
+      color: rgba(255, 255, 255, 0.7) !important;
     }
     
     .mat-mdc-form-field-error {
-      color: #f44336 !important;
+      color: #ff6b6b !important;
       font-size: 12px !important;
       margin-top: 0.25rem !important;
+      font-weight: 400 !important;
+      letter-spacing: 0.2px !important;
     }
     
     /* Improve focus states for better mobile UX */
@@ -80,7 +91,7 @@
       .mdc-notched-outline__leading,
       .mdc-notched-outline__notch,
       .mdc-notched-outline__trailing {
-        border-color: #6f8cc7 !important;
+        border-color: var(--accent-light) !important;
         border-width: 2px !important;
       }
     }
@@ -90,30 +101,37 @@
 .login-action-buttons, form button {
   display: flex !important;
   justify-content: center !important;
-  margin-top: 1.5rem !important;
+  margin-top: 1.75rem !important;
   
   button, .mat-mdc-raised-button {
     min-width: 120px !important;
     width: 100% !important; /* Full width on mobile */
     padding: 0.75rem 1.5rem !important;
     font-family: var(--font-family-sci-fi) !important;
-    background-color: #25375c !important; /* Dark blue button */
+    background-color: var(--accent-color) !important; /* Use accent color */
     color: white !important;
     border: none !important;
-    border-radius: 4px !important;
+    border-radius: 8px !important;
     font-size: 16px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.5px !important;
+    transition: all 0.2s ease !important;
     
     @media (max-width: 599px) {
       min-height: 48px !important; /* Better touch target */
     }
     
     &:hover {
-      background-color: #314670 !important; /* Lighter blue on hover */
+      background-color: var(--accent-light) !important;
+      transform: translateY(-2px) !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
     }
     
     &:disabled {
       background-color: rgba(37, 55, 92, 0.5) !important;
       color: rgba(255, 255, 255, 0.5) !important;
+      transform: none !important;
+      box-shadow: none !important;
     }
   }
 }
@@ -123,7 +141,7 @@
   .mat-mdc-card-actions .mat-mdc-button.mat-mdc-button-base,
   .mat-mdc-card-actions .mat-mdc-raised-button.mat-mdc-button-base,
   .mat-mdc-raised-button:not(:disabled) {
-    background-color: #25375c !important; /* Dark blue button */
+    background-color: var(--accent-color) !important;
     color: white !important;
     font-family: var(--font-family-sci-fi) !important;
     padding: 0.75rem 1.5rem !important;

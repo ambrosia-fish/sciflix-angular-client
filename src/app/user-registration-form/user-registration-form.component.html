@@ -1,18 +1,8 @@
-<mat-card class="signup-card">
-  <mat-card-header>
-    <mat-card-title class="signup-title">Sign Up!</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <style>
-      /* Override input backgrounds directly in the component */
-      .dark-input .mat-mdc-text-field-wrapper {
-        background-color: rgba(30, 41, 59, 0.8) !important;
-      }
-      .dark-input input {
-        background-color: rgba(30, 41, 59, 0.8) !important;
-      }
-    </style>
-    <form (ngSubmit)="registerUser()" #registrationForm="ngForm">
+<div class="signup-container">
+  <h2 class="signup-title">Sign Up!</h2>
+  
+  <form (ngSubmit)="registerUser()" #registrationForm="ngForm">
+    <div class="form-field-container">
       <mat-form-field appearance="outline" class="form-field dark-input">
         <mat-label>Username</mat-label>
         <input
@@ -27,6 +17,9 @@
         >
         <mat-icon matSuffix>person</mat-icon>
       </mat-form-field>
+    </div>
+    
+    <div class="form-field-container">
       <mat-form-field appearance="outline" class="form-field dark-input">
         <mat-label>Password</mat-label>
         <input
@@ -49,6 +42,9 @@
           <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
       </mat-form-field>
+    </div>
+    
+    <div class="form-field-container">
       <mat-form-field appearance="outline" class="form-field dark-input">
         <mat-label>Email</mat-label>
         <input
@@ -63,6 +59,9 @@
         >
         <mat-icon matSuffix>email</mat-icon>
       </mat-form-field>
+    </div>
+    
+    <div class="form-field-container">
       <mat-form-field appearance="outline" class="form-field birthdate-field dark-input">
         <mat-label>Birthday</mat-label>
         <input
@@ -76,16 +75,17 @@
         >
         <mat-icon matSuffix>event</mat-icon>
       </mat-form-field>
-      <div class="signup-action-buttons">
-        <button
-          mat-raised-button
-          type="submit"
-          [disabled]="isLoading"
-        >
-          <span *ngIf="!isLoading">Sign Up</span>
-          <mat-spinner *ngIf="isLoading" diameter="24" class="spinner"></mat-spinner>
-        </button>
-      </div>
-    </form>
-  </mat-card-content>
-</mat-card>
+    </div>
+    
+    <div class="signup-action-buttons">
+      <button
+        mat-raised-button
+        type="submit"
+        [disabled]="isLoading"
+      >
+        <span *ngIf="!isLoading">Sign Up</span>
+        <mat-spinner *ngIf="isLoading" diameter="24" class="spinner"></mat-spinner>
+      </button>
+    </div>
+  </form>
+</div>

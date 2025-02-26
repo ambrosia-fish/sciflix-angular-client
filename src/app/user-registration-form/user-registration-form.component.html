@@ -61,7 +61,7 @@
       </mat-form-field>
     </div>
     
-    <div class="form-field-container">
+    <div class="form-field-container date-field-container">
       <mat-form-field appearance="outline" class="form-field birthdate-field dark-input">
         <mat-label>Birthday</mat-label>
         <input
@@ -71,7 +71,7 @@
           name="birthday"
           #birthday="ngModel"
           max="{{maxDate | date:'yyyy-MM-dd'}}"
-          style="background-color: rgba(30, 41, 59, 0.8) !important;"
+          style="background-color: rgba(30, 41, 59, 0.8) !important; min-width: 100% !important;"
         >
         <mat-icon matSuffix>event</mat-icon>
       </mat-form-field>

@@ -16,12 +16,6 @@
           minlength="3"
         >
         <mat-icon matSuffix>person</mat-icon>
-        <mat-error *ngIf="username.errors?.['required'] && username.touched">
-          Username is required
-        </mat-error>
-        <mat-error *ngIf="username.errors?.['minlength'] && username.touched">
-          Username must be at least 3 characters
-        </mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline" class="form-field">
         <mat-label>Password</mat-label>
@@ -43,12 +37,6 @@
         >
           <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
-        <mat-error *ngIf="password.errors?.['required'] && password.touched">
-          Password is required
-        </mat-error>
-        <mat-error *ngIf="password.errors?.['minlength'] && password.touched">
-          Password must be at least 8 characters
-        </mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline" class="form-field">
         <mat-label>Email</mat-label>
@@ -62,12 +50,6 @@
           email
         >
         <mat-icon matSuffix>email</mat-icon>
-        <mat-error *ngIf="email.errors?.['required'] && email.touched">
-          Email is required
-        </mat-error>
-        <mat-error *ngIf="email.errors?.['email'] && email.touched">
-          Please enter a valid email address
-        </mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline" class="form-field birthdate-field">
         <mat-label>Birthday</mat-label>
@@ -80,15 +62,12 @@
           max="{{maxDate | date:'yyyy-MM-dd'}}"
         >
         <mat-icon matSuffix>event</mat-icon>
-        <mat-error *ngIf="birthday.errors?.['max'] && birthday.touched">
-          Please enter a valid birth date
-        </mat-error>
       </mat-form-field>
       <div class="signup-action-buttons">
         <button
           mat-raised-button
           type="submit"
-          [disabled]="registrationForm.invalid || isLoading"
+          [disabled]="isLoading"
           class="submit-button"
         >
           <span *ngIf="!isLoading">Sign Up</span>

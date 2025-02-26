@@ -36,6 +36,85 @@ html, body {
   }
 }
 
+/* Global fix for field backgrounds extending beyond their containers */
+.mat-mdc-form-field {
+  display: inline-block;
+  position: relative;
+  text-align: left;
+}
+
+.mat-mdc-text-field-wrapper {
+  position: relative;
+  display: inline-flex;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.mdc-text-field--outlined .mdc-notched-outline {
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.mdc-text-field--outlined .mdc-notched-outline__leading, 
+.mdc-text-field--outlined .mdc-notched-outline__notch, 
+.mdc-text-field--outlined .mdc-notched-outline__trailing {
+  overflow: visible;
+}
+
+/* Welcome Page Buttons (High specificity) */
+.welcome-container button.mat-mdc-raised-button,
+.main-page button.mat-mdc-raised-button,
+.button-container button.mat-mdc-raised-button {
+  background-color: #314670 !important;
+  color: white !important;
+  font-family: var(--font-family-sci-fi) !important;
+  width: 100% !important;
+  max-width: 280px !important;
+  padding: 1rem !important;
+  margin: 0.5rem 0 !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3) !important;
+  border-radius: 6px !important;
+  text-transform: none !important;
+  font-size: 1.25rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Login and Registration Form Buttons */
+.login-card button.mat-mdc-raised-button,
+.signup-card button.mat-mdc-raised-button,
+.mat-mdc-dialog-container button.mat-mdc-raised-button {
+  background-color: var(--accent-color) !important; /* Match dark blue instead of purple */
+  color: white !important;
+  font-family: var(--font-family-sci-fi) !important;
+  border-radius: 4px !important;
+  padding: 0.75rem 1.5rem !important;
+}
+
+/* Material Overrides */
+.mat-mdc-card {
+  background-color: var(--mid-color-primary) !important;
+  color: var(--light-color-primary) !important;
+}
+
+/* Card styles for dialogs */
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  background-color: #25375c !important;
+  border-radius: 12px !important;
+}
+
+/* Mobile-friendly dialog */
+.mobile-friendly-dialog .mat-mdc-dialog-container {
+  padding: 16px !important;
+}
+
+@media (max-width: 599px) {
+  .mobile-friendly-dialog .mat-mdc-dialog-container {
+    padding: 12px !important;
+  }
+}
+
 /* Form field outlines and inputs */
 .mat-mdc-form-field.mat-mdc-form-field-type-mat-input.mat-form-field-appearance-outline,
 .mat-mdc-text-field-wrapper.mdc-text-field--outlined {
@@ -49,10 +128,17 @@ html, body {
 
 .mat-mdc-input-element, input.mat-mdc-input-element {
   color: white !important;
+  font-family: var(--font-family-base) !important;
   font-weight: 400 !important;
+  caret-color: var(--accent-light) !important;
 }
 
 .mat-mdc-form-field-label, .mat-mdc-floating-label {
+  color: rgba(255, 255, 255, 0.7) !important;
+  font-weight: 400 !important;
+}
+
+.mat-mdc-form-field-icon-suffix .mat-icon {
   color: rgba(255, 255, 255, 0.7) !important;
 }
 
@@ -63,22 +149,88 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0;
 }
 
-/* Card styles for dialogs */
-.mat-mdc-dialog-container .mdc-dialog__surface {
-  background-color: #25375c !important;
-  border-radius: 12px !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+/* Movie Card Specific Overrides */
+.movie-title {
+  font-family: var(--font-family-sci-fi) !important;
 }
 
-/* Mobile-friendly dialog */
-.mobile-friendly-dialog .mat-mdc-dialog-container {
+.movie-genre, 
+.movie-director {
+  font-family: var(--font-family-base) !important;
+}
+
+.synopsis-button {
+  font-family: var(--font-family-sci-fi) !important;
+  color: var(--accent-color) !important;
+}
+
+/* Movie Cards Grid */
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.5rem;
+  padding: 1.5rem;
+}
+
+/* Material Card Overrides */
+.mat-mdc-card-content {
   padding: 16px !important;
 }
 
-@media (max-width: 599px) {
-  .mobile-friendly-dialog .mat-mdc-dialog-container {
-    padding: 12px !important;
-  }
+.mat-mdc-button {
+  font-family: var(--font-family-sci-fi) !important;
+}
+
+.mat-mdc-card-title {
+  font-family: var(--font-family-sci-fi) !important;
+  color: var(--light-color-primary) !important;
+}
+
+/* Fix for iOS Safari 100vh issue */
+.full-height {
+  height: 100vh;
+  height: -webkit-fill-available;
+  height: fill-available;
+}
+
+/* Utility Classes */
+.text-sci-fi {
+  font-family: var(--font-family-sci-fi) !important;
+}
+
+.text-glow {
+  text-shadow: 0 0 10px rgba(74, 93, 143, 0.3);
+}
+
+.bg-dark {
+  background-color: var(--dark-color-primary);
+}
+
+.bg-mid {
+  background-color: var(--mid-color-primary);
+}
+
+.color-accent {
+  color: var(--accent-color);
+}
+
+.color-light {
+  color: var(--light-color-primary);
+}
+
+/* MDC notched outline colors */
+.mdc-notched-outline__leading,
+.mdc-notched-outline__notch,
+.mdc-notched-outline__trailing {
+  border-color: rgba(111, 140, 199, 0.3) !important;
+  border-width: 1px !important;
+}
+
+.mat-mdc-form-field.mat-focused .mdc-notched-outline__leading,
+.mat-mdc-form-field.mat-focused .mdc-notched-outline__notch,
+.mat-mdc-form-field.mat-focused .mdc-notched-outline__trailing {
+  border-color: var(--accent-light) !important;
+  border-width: 2px !important;
 }
 
 /* Snackbar customization */
@@ -108,10 +260,21 @@ h1, h2, h3, h4, h5, h6 {
   color: white !important;
 }
 
-/* Better touch targets for mobile */
+/* Better tap/touch feedback for mobile */
 @media (max-width: 599px) {
   .mat-mdc-button,
   .mat-mdc-raised-button {
+    min-height: 48px !important;
+  }
+  
+  .mat-mdc-button:active,
+  .mat-mdc-raised-button:active {
+    transform: scale(0.98) !important;
+    transition: transform 0.1s !important;
+  }
+  
+  /* Better touch areas in general */
+  .mat-mdc-form-field-infix {
     min-height: 48px !important;
   }
   

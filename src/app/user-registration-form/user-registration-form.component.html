@@ -3,7 +3,7 @@
     <mat-card-title class="signup-title">Sign Up!</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <form (ngSubmit)="registerUser()">
+    <form (ngSubmit)="registerUser()" #registrationForm="ngForm">
       <mat-form-field appearance="outline" class="form-field">
         <mat-label>Username</mat-label>
         <input
@@ -12,19 +12,43 @@
           type="text"
           name="username"
           required
+          #username="ngModel"
+          minlength="3"
         >
         <mat-icon matSuffix>person</mat-icon>
+        <mat-error *ngIf="username.errors?.['required'] && username.touched">
+          Username is required
+        </mat-error>
+        <mat-error *ngIf="username.errors?.['minlength'] && username.touched">
+          Username must be at least 3 characters
+        </mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline" class="form-field">
         <mat-label>Password</mat-label>
         <input
           matInput
           [(ngModel)]="userData.password"
-          type="password"
+          [type]="hidePassword ? 'password' : 'text'"
           name="password"
           required
+          #password="ngModel"
+          minlength="8"
         >
-        <mat-icon matSuffix>lock</mat-icon>
+        <button 
+          mat-icon-button 
+          matSuffix 
+          type="button"
+          (click)="hidePassword = !hidePassword" 
+          [attr.aria-label]="'Toggle password visibility'"
+        >
+          <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error *ngIf="password.errors?.['required'] && password.touched">
+          Password is required
+        </mat-error>
+        <mat-error *ngIf="password.errors?.['minlength'] && password.touched">
+          Password must be at least 8 characters
+        </mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline" class="form-field">
         <mat-label>Email</mat-label>
@@ -34,8 +58,16 @@
           type="email"
           name="email"
           required
+          #email="ngModel"
+          email
         >
         <mat-icon matSuffix>email</mat-icon>
+        <mat-error *ngIf="email.errors?.['required'] && email.touched">
+          Email is required
+        </mat-error>
+        <mat-error *ngIf="email.errors?.['email'] && email.touched">
+          Please enter a valid email address
+        </mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline" class="form-field birthdate-field">
         <mat-label>Birthday</mat-label>
@@ -44,15 +76,23 @@
           [(ngModel)]="userData.birthday"
           type="date"
           name="birthday"
+          #birthday="ngModel"
+          max="{{maxDate | date:'yyyy-MM-dd'}}"
         >
         <mat-icon matSuffix>event</mat-icon>
+        <mat-error *ngIf="birthday.errors?.['max'] && birthday.touched">
+          Please enter a valid birth date
+        </mat-error>
       </mat-form-field>
       <div class="signup-action-buttons">
         <button
           mat-raised-button
           type="submit"
+          [disabled]="registrationForm.invalid || isLoading"
+          class="submit-button"
         >
-          Sign Up
+          <span *ngIf="!isLoading">Sign Up</span>
+          <mat-spinner *ngIf="isLoading" diameter="24" class="spinner"></mat-spinner>
         </button>
       </div>
     </form>

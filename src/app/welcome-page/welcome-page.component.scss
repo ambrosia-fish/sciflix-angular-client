@@ -43,7 +43,7 @@
   }
 }
 
-.actions-container, .button-container {
+.actions-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -54,32 +54,48 @@
   max-width: 280px;
 }
 
-button, .mat-mdc-raised-button {
+.action-button {
   width: 100% !important;
   padding: 1rem 0 !important;
   font-family: var(--font-family-sci-fi) !important;
   font-size: 1.25rem !important;
   border: none !important;
-  background-color: #25375c !important; /* Dark blue buttons */
+  background-color: #314670 !important; /* Dark blue buttons */
   color: var(--light-color-primary) !important;
   cursor: pointer !important;
   transition: all 0.3s ease !important;
   border-radius: 6px !important;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
   
   /* Larger touch targets on mobile */
   @media (max-width: 599px) {
-    padding: 1rem 0 !important;
+    min-height: 56px !important;
     font-size: 1.2rem !important;
   }
   
   &:hover {
-    background-color: #314670 !important; /* Lighter blue on hover */
+    background-color: #3b5283 !important; /* Lighter blue on hover */
   }
   
   &:active {
     transform: translateY(1px) !important;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+  }
+
+  mat-icon {
+    margin-right: 4px !important;
+  }
+}
+
+.guest-button {
+  background-color: #25375c !important;
+
+  &:hover {
+    background-color: #314670 !important;
   }
 }
 

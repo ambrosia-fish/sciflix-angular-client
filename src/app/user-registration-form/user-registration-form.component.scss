@@ -1,113 +1,38 @@
-.signup-container {
-  background-color: #25375c;
-  border-radius: 12px;
-  padding: 2rem;
-  width: 90%;
-  max-width: 450px; /* Increased from 380px */
-  margin: 0 auto;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
-  
-  @media (max-width: 599px) {
-    padding: 1.5rem;
-    width: 92%;
-  }
-}
-
-.signup-title {
-  font-family: var(--font-family-sci-fi);
-  color: var(--light-color-primary);
-  text-align: center;
-  margin-bottom: 1.75rem;
-  font-size: 1.8rem;
-  letter-spacing: 1px;
-  
-  @media (max-width: 599px) {
-    font-size: 1.5rem;
-    margin-bottom: 1.25rem;
-  }
-}
-
-.form-field-container {
-  margin-bottom: 1.25rem;
-}
-
-.date-field-container {
-  margin-bottom: 1.25rem;
-  width: 100%;
-}
-
-.form-field {
-  width: 100%;
-}
-
-.birthdate-field {
-  width: 100%;
-}
-
-// Force dark backgrounds for input fields
-::ng-deep {
-  .mat-mdc-text-field-wrapper {
-    background-color: rgba(30, 41, 59, 0.8) !important;
-    overflow: hidden !important;
-  }
-  
-  .mat-mdc-form-field-flex {
-    background-color: transparent !important;
-  }
-  
-  .mdc-text-field--outlined {
-    overflow: hidden !important;
-  }
-  
-  input.mat-mdc-input-element {
-    background-color: rgba(30, 41, 59, 0.8) !important;
-  }
-  
-  // Date picker styles
-  input[type="date"] {
-    color: white !important;
-    width: 100% !important; /* Ensure date field uses full width */
-    min-width: 200px !important; /* Prevent date field from being too narrow */
-    
-    &::-webkit-calendar-picker-indicator {
-      filter: invert(1) !important;
-      opacity: 0.7 !important;
-    }
-  }
-  
-  // Fix for birthday field being cut off
-  .birthdate-field {
-    width: 100% !important;
-    
-    .mat-mdc-form-field-infix {
-      width: 100% !important;
-      min-width: 200px !important;
-    }
-    
-    // Special fix for the date input field
-    input.mat-mdc-input-element {
-      width: 100% !important;
-      min-width: 100% !important;
-      position: relative !important;
-      box-sizing: border-box !important;
-    }
-  }
-}
-
-.signup-action-buttons {
+.button-container {
   display: flex;
-  justify-content: center;
-  margin-top: 2rem;
-  
-  button {
-    min-width: 160px;
-    
-    @media (max-width: 599px) {
-      width: 100%;
-    }
-  }
+  gap: 1rem;
+  margin-top: 1rem;
 }
 
-.spinner {
-  margin: 0 auto;
+mat-form-field {
+  display: block;
+  margin-bottom: 1rem;
+  width: 100%; /* Make form fields full width of container */
+}
+
+mat-card {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 1rem;
+  box-sizing: border-box; /* Ensure padding is included in width calculation */
+}
+
+mat-card-title {
+  margin-bottom: 1rem;
+}
+
+form {
+  width: 100%; /* Make form full width of container */
+}
+
+/* Ensure inputs don't overflow their containers */
+input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Make sure content doesn't overflow */
+mat-card-content {
+  overflow: hidden;
+  width: 100%;
 }

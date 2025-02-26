@@ -3,7 +3,7 @@
     <mat-card-title class="login-title">Log in to Sci-Flix!</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <form (ngSubmit)="loginUser()">
+    <form (ngSubmit)="loginUser()" #loginForm="ngForm">
       <mat-form-field appearance="outline" class="form-field">
         <mat-label>Username</mat-label>
         <input
@@ -12,24 +12,41 @@
           type="text"
           name="username"
           required
+          #username="ngModel"
         >
         <mat-icon matSuffix>person</mat-icon>
+        <mat-error *ngIf="username.invalid && username.touched">
+          Username is required
+        </mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline" class="form-field">
         <mat-label>Password</mat-label>
         <input
           matInput
           [(ngModel)]="userData.password"
-          type="password"
+          [type]="hidePassword ? 'password' : 'text'"
           name="password"
           required
+          #password="ngModel"
         >
-        <mat-icon matSuffix>lock</mat-icon>
+        <button 
+          mat-icon-button 
+          matSuffix 
+          type="button"
+          (click)="hidePassword = !hidePassword" 
+          [attr.aria-label]="'Toggle password visibility'"
+        >
+          <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error *ngIf="password.invalid && password.touched">
+          Password is required
+        </mat-error>
       </mat-form-field>
       <div class="login-action-buttons">
         <button
           mat-raised-button
           type="submit"
+          [disabled]="loginForm.invalid"
         >
           Login
         </button>

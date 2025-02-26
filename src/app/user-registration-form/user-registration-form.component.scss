@@ -8,7 +8,8 @@
   
   @media (max-width: 599px) {
     max-width: 90% !important;
-    margin: 1.5rem auto !important;
+    margin: 1rem auto !important;
+    padding: 1rem !important;
   }
 }
 
@@ -21,6 +22,7 @@
   
   @media (max-width: 599px) {
     font-size: 1.5rem !important;
+    margin-bottom: 1rem !important;
   }
 }
 
@@ -31,11 +33,14 @@
   
   ::ng-deep {
     .mat-mdc-form-field-subscript-wrapper {
-      display: none !important;
+      height: auto !important;
+      position: static !important;
+      transform: none !important;
     }
     
     .mat-mdc-form-field-infix {
       padding: 0.5em 0 !important;
+      min-height: 48px !important; /* More touch-friendly height */
     }
     
     .mat-mdc-text-field-wrapper {
@@ -53,6 +58,7 @@
     
     .mat-mdc-input-element {
       color: #000 !important;
+      font-size: 16px !important; /* Prevent zoom on iOS */
     }
     
     .mat-mdc-form-field-icon-suffix {
@@ -62,11 +68,40 @@
     .mat-icon {
       color: #c44 !important;
     }
+    
+    .mat-mdc-form-field-error {
+      color: #f44336 !important;
+      font-size: 12px !important;
+      margin-top: 0.25rem !important;
+    }
+    
+    /* Improve focus states for better mobile UX */
+    .mdc-text-field--focused {
+      .mdc-notched-outline__leading,
+      .mdc-notched-outline__notch,
+      .mdc-notched-outline__trailing {
+        border-color: #6f8cc7 !important;
+        border-width: 2px !important;
+      }
+    }
   }
 }
 
 .birthdate-field {
   ::ng-deep {
+    input[type="date"] {
+      appearance: none !important;
+      -webkit-appearance: none !important;
+      padding: 0.5rem 0 !important;
+      
+      &::-webkit-calendar-picker-indicator {
+        filter: invert(0.5) sepia(1) saturate(5) hue-rotate(175deg) !important;
+        opacity: 0.8 !important;
+        cursor: pointer !important;
+        margin-right: 0.5rem !important;
+      }
+    }
+    
     .mat-datepicker-toggle {
       color: #999 !important;
     }
@@ -84,15 +119,27 @@
   
   button, .mat-mdc-raised-button {
     min-width: 120px !important;
+    width: 100% !important; /* Full width on mobile */
     padding: 0.75rem 1.5rem !important;
     font-family: var(--font-family-sci-fi) !important;
-    background-color: #25375c !important; /* Dark blue button */
+    background-color: #314670 !important; /* Dark blue button */
     color: white !important;
     border: none !important;
     border-radius: 4px !important;
+    font-size: 16px !important;
+    position: relative !important;
+    
+    @media (max-width: 599px) {
+      min-height: 48px !important; /* Better touch target */
+    }
     
     &:hover {
-      background-color: #314670 !important; /* Lighter blue on hover */
+      background-color: #3b5283 !important; /* Lighter blue on hover */
+    }
+    
+    &:disabled {
+      background-color: rgba(37, 55, 92, 0.5) !important;
+      color: rgba(255, 255, 255, 0.5) !important;
     }
   }
 }
@@ -102,9 +149,38 @@
   .mat-mdc-card-actions .mat-mdc-button.mat-mdc-button-base,
   .mat-mdc-card-actions .mat-mdc-raised-button.mat-mdc-button-base,
   .mat-mdc-raised-button:not(:disabled) {
-    background-color: #25375c !important; /* Dark blue button */
+    background-color: #314670 !important; /* Dark blue button */
     color: white !important;
     font-family: var(--font-family-sci-fi) !important;
     padding: 0.75rem 1.5rem !important;
   }
+  
+  /* Improve button touch states */
+  .mat-mdc-button .mat-mdc-button-touch-target,
+  .mat-mdc-raised-button .mat-mdc-button-touch-target {
+    height: 48px !important;
+  }
+}
+
+/* Add active tap effect for buttons on mobile */
+@media (max-width: 599px) {
+  button:active {
+    transform: scale(0.98) !important;
+    transition: transform 0.1s !important;
+  }
+}
+
+/* Loading spinner styles */
+.spinner {
+  margin: 0 auto !important;
+  
+  ::ng-deep circle {
+    stroke: white !important;
+  }
+}
+
+.submit-button {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }

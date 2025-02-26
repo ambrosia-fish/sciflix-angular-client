@@ -37,6 +37,41 @@ html, body {
   }
 }
 
+/* ======== CRITICAL FORM/DIALOG FIXES ======== */
+/* Fix for horizontal scrolling in dialogs */
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  overflow-x: hidden !important;
+  max-width: 100vw !important;
+}
+
+.mobile-friendly-dialog .mat-mdc-dialog-container {
+  padding: 16px !important;
+  overflow-x: hidden !important;
+}
+
+/* Fix for form fields in dialogs - prevent horizontal overflow */
+.mat-mdc-form-field {
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Ensure all inputs and form elements are properly contained */
+input, textarea, select, .mat-mdc-input-element {
+  width: 100% !important;
+  box-sizing: border-box !important;
+  max-width: 100% !important;
+}
+
+form {
+  width: 100% !important;
+  overflow: hidden !important;
+}
+
+mat-card-content {
+  overflow: hidden !important;
+  width: 100% !important;
+}
+
 /* ======== CRITICAL INPUT FIELD FIXES ======== */
 /* Remove the yellow/cream background for ALL input fields */
 .mat-mdc-input-element,
@@ -119,10 +154,6 @@ input.mat-mdc-input-element,
 .mat-mdc-dialog-container .mdc-dialog__surface {
   background-color: #25375c !important;
   border-radius: 12px !important;
-}
-
-.mobile-friendly-dialog .mat-mdc-dialog-container {
-  padding: 16px !important;
 }
 
 @media (max-width: 599px) {

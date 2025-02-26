@@ -36,29 +36,40 @@ html, body {
   }
 }
 
-/* Global fix for field backgrounds extending beyond their containers */
+/* CRITICAL FIX for field backgrounds extending beyond their containers */
 .mat-mdc-form-field {
-  display: inline-block;
-  position: relative;
-  text-align: left;
+  display: inline-block !important;
+  border-radius: 4px !important;
+  position: relative !important;
+  text-align: left !important;
 }
 
 .mat-mdc-text-field-wrapper {
-  position: relative;
-  display: inline-flex;
-  border-radius: 8px;
-  overflow: hidden;
+  position: relative !important;
+  display: inline-flex !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+  border-radius: 4px !important;
 }
 
-.mdc-text-field--outlined .mdc-notched-outline {
-  overflow: hidden;
-  border-radius: 8px;
+.mdc-text-field {
+  border-radius: 4px !important;
+  overflow: hidden !important;
 }
 
-.mdc-text-field--outlined .mdc-notched-outline__leading, 
-.mdc-text-field--outlined .mdc-notched-outline__notch, 
-.mdc-text-field--outlined .mdc-notched-outline__trailing {
-  overflow: visible;
+.mdc-notched-outline__leading, 
+.mdc-notched-outline__notch, 
+.mdc-notched-outline__trailing {
+  border-radius: 0 !important;
+}
+
+/* Specific fix for search bar */
+.search-container .mat-mdc-form-field,
+.search-container .mat-mdc-text-field-wrapper,
+.search-container .mdc-text-field {
+  overflow: hidden !important;
+  border-radius: 4px !important;
 }
 
 /* Welcome Page Buttons (High specificity) */
@@ -81,15 +92,23 @@ html, body {
   justify-content: center !important;
 }
 
-/* Login and Registration Form Buttons */
+/* Login and Registration Form Buttons - NO GRADIENTS */
 .login-card button.mat-mdc-raised-button,
 .signup-card button.mat-mdc-raised-button,
 .mat-mdc-dialog-container button.mat-mdc-raised-button {
-  background-color: var(--accent-color) !important; /* Match dark blue instead of purple */
+  background-color: var(--accent-color) !important;
   color: white !important;
   font-family: var(--font-family-sci-fi) !important;
   border-radius: 4px !important;
   padding: 0.75rem 1.5rem !important;
+  transition: background-color 0.2s ease !important;
+}
+
+/* Button hover states WITHOUT gradients */
+.login-card button.mat-mdc-raised-button:hover,
+.signup-card button.mat-mdc-raised-button:hover,
+.mat-mdc-dialog-container button.mat-mdc-raised-button:hover {
+  background-color: var(--accent-light) !important;
 }
 
 /* Material Overrides */
@@ -119,7 +138,7 @@ html, body {
 .mat-mdc-form-field.mat-mdc-form-field-type-mat-input.mat-form-field-appearance-outline,
 .mat-mdc-text-field-wrapper.mdc-text-field--outlined {
   background-color: rgba(30, 41, 59, 0.8) !important;
-  border-radius: 8px !important;
+  border-radius: 4px !important;
 }
 
 .mat-mdc-form-field-infix {
@@ -284,4 +303,9 @@ h1, h2, h3, h4, h5, h6 {
   button {
     font-size: 16px !important; /* Prevent zoom on iOS */
   }
+}
+
+/* Hide all validation errors by default */
+.mat-error {
+  display: none !important;
 }

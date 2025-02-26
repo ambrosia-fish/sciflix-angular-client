@@ -15,9 +15,6 @@
           #username="ngModel"
         >
         <mat-icon matSuffix>person</mat-icon>
-        <mat-error *ngIf="username.invalid && username.touched">
-          Username is required
-        </mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline" class="form-field">
         <mat-label>Password</mat-label>
@@ -38,16 +35,12 @@
         >
           <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
-        <mat-error *ngIf="password.invalid && password.touched">
-          Password is required
-        </mat-error>
       </mat-form-field>
       <div class="login-action-buttons">
         <button
           mat-raised-button
           type="submit"
           [disabled]="loginForm.invalid"
-          class="submit-button"
         >
           <span *ngIf="!isLoading">Login</span>
           <mat-spinner *ngIf="isLoading" diameter="24" class="spinner"></mat-spinner>

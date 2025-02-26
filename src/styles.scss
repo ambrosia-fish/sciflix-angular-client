@@ -7,6 +7,11 @@
   --mid-color-primary: #25375c;
   --light-color-primary: #d7e0ea;
   --accent-color: #4a5d8f;
+  --accent-dark: #314670;
+  --accent-light: #6f8cc7;
+  --success-color: #43a047;
+  --error-color: #f44336;
+  --warning-color: #ffa000;
   --font-family-base: 'Roboto', sans-serif;
   --font-family-sci-fi: 'Orbitron', sans-serif;
   
@@ -35,7 +40,7 @@ html, body {
 .welcome-container button.mat-mdc-raised-button,
 .main-page button.mat-mdc-raised-button,
 .button-container button.mat-mdc-raised-button {
-  background-color: #25375c !important;
+  background-color: #314670 !important;
   color: white !important;
   font-family: var(--font-family-sci-fi) !important;
   width: 100% !important;
@@ -46,13 +51,16 @@ html, body {
   border-radius: 6px !important;
   text-transform: none !important;
   font-size: 1.25rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 /* Login and Registration Form Buttons */
 .login-card button.mat-mdc-raised-button,
 .signup-card button.mat-mdc-raised-button,
 .mat-mdc-dialog-container button.mat-mdc-raised-button {
-  background-color: #25375c !important; /* Match dark blue instead of purple */
+  background-color: #314670 !important; /* Match dark blue instead of purple */
   color: white !important;
   font-family: var(--font-family-sci-fi) !important;
   border-radius: 4px !important;
@@ -69,6 +77,17 @@ html, body {
 .mat-mdc-dialog-container .mdc-dialog__surface {
   background-color: #25375c !important;
   border-radius: 8px !important;
+}
+
+/* Mobile-friendly dialog */
+.mobile-friendly-dialog .mat-mdc-dialog-container {
+  padding: 16px !important;
+}
+
+@media (max-width: 599px) {
+  .mobile-friendly-dialog .mat-mdc-dialog-container {
+    padding: 12px !important;
+  }
 }
 
 /* Form field outlines and inputs */
@@ -186,4 +205,62 @@ h1, h2, h3, h4, h5, h6 {
 .mat-mdc-form-field.mat-focused .mdc-notched-outline__trailing {
   border-color: #c44 !important;
   border-width: 2px !important;
+}
+
+/* Snackbar customization */
+.success-snackbar {
+  background-color: var(--success-color) !important;
+  color: white !important;
+}
+
+.success-snackbar .mdc-snackbar__surface {
+  background-color: var(--success-color) !important;
+}
+
+.success-snackbar .mat-mdc-button {
+  color: white !important;
+}
+
+.error-snackbar {
+  background-color: var(--error-color) !important;
+  color: white !important;
+}
+
+.error-snackbar .mdc-snackbar__surface {
+  background-color: var(--error-color) !important;
+}
+
+.error-snackbar .mat-mdc-button {
+  color: white !important;
+}
+
+/* Loading spinner global styles */
+.mat-mdc-progress-spinner.mat-accent circle {
+  stroke: var(--light-color-primary) !important;
+}
+
+/* Better tap/touch feedback for mobile */
+@media (max-width: 599px) {
+  .mat-mdc-button,
+  .mat-mdc-raised-button {
+    min-height: 48px !important;
+  }
+  
+  .mat-mdc-button:active,
+  .mat-mdc-raised-button:active {
+    transform: scale(0.98) !important;
+    transition: transform 0.1s !important;
+  }
+  
+  /* Better touch areas in general */
+  .mat-mdc-form-field-infix {
+    min-height: 48px !important;
+  }
+  
+  input,
+  textarea,
+  select,
+  button {
+    font-size: 16px !important; /* Prevent zoom on iOS */
+  }
 }

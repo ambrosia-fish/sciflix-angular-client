@@ -34,16 +34,16 @@ export class WelcomePageComponent {
 
   openUserRegistrationDialog(): void {
     this.dialog.open(UserRegistrationFormComponent, {
-      width: '320px',
-      maxWidth: '90vw',
+      width: '450px',
+      maxWidth: '95vw',
       panelClass: 'mobile-friendly-dialog'
     });
   }
 
   openUserLoginDialog(): void {
     this.dialog.open(UserLoginFormComponent, {
-      width: '320px',
-      maxWidth: '90vw',
+      width: '450px',
+      maxWidth: '95vw',
       panelClass: 'mobile-friendly-dialog'
     });
   }

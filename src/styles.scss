@@ -70,6 +70,21 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--light-color-primary) !important;
 }
 
+/* Dialog styling to prevent overflow */
+.mat-mdc-dialog-container .mdc-dialog__container {
+  max-width: 100vw !important;
+}
+
+.dialog-responsive .mat-mdc-dialog-surface {
+  overflow-x: hidden !important;
+}
+
+/* Ensure all form inputs stay within their containers */
+input, textarea, select {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
 /* Utility Classes */
 .text-sci-fi {
   font-family: var(--font-family-sci-fi) !important;

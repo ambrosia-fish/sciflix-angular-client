@@ -28,13 +28,17 @@ export class WelcomePageComponent {
 
   openUserRegistrationDialog(): void {
     this.dialog.open(UserRegistrationFormComponent, {
-      width: '280px'
+      width: '340px', // Increased from 280px to accommodate form content
+      maxWidth: '100vw', // Ensure it doesn't exceed viewport width on mobile
+      panelClass: 'dialog-responsive' // Add a class for additional styling if needed
     });
   }
 
   openUserLoginDialog(): void {
     this.dialog.open(UserLoginFormComponent, {
-      width: '280px'
+      width: '340px', // Increased from 280px to accommodate form content
+      maxWidth: '100vw', // Ensure it doesn't exceed viewport width on mobile
+      panelClass: 'dialog-responsive' // Add a class for additional styling if needed
     });
   }
 

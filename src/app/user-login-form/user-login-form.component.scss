@@ -3,13 +3,13 @@
   border-radius: 12px;
   padding: 2rem;
   width: 90%;
-  max-width: 380px;
+  max-width: 450px; /* Increased from 380px */
   margin: 0 auto;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
   
   @media (max-width: 599px) {
     padding: 1.5rem;
-    width: 90%;
+    width: 92%;
   }
 }
 
@@ -61,7 +61,7 @@
   margin-top: 2rem;
   
   button {
-    min-width: 140px;
+    min-width: 160px;
     
     @media (max-width: 599px) {
       width: 100%;

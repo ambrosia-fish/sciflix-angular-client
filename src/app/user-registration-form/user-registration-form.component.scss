@@ -1,0 +1,38 @@
+.button-container {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+mat-form-field {
+  display: block;
+  margin-bottom: 1rem;
+  width: 100%; /* Make form fields full width of container */
+}
+
+mat-card {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 1rem;
+  box-sizing: border-box; /* Ensure padding is included in width calculation */
+}
+
+mat-card-title {
+  margin-bottom: 1rem;
+}
+
+form {
+  width: 100%; /* Make form full width of container */
+}
+
+/* Ensure inputs don't overflow their containers */
+input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Make sure content doesn't overflow */
+mat-card-content {
+  overflow: hidden;
+  width: 100%;
+}

@@ -1,80 +1,84 @@
-.signup-card, .mat-mdc-card {
-  max-width: 400px !important;
-  width: 95% !important;
-  margin: 2rem auto !important;
-  border-radius: 12px !important;
-  padding: 1.75rem !important;
-  background-color: #25375c !important;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+.signup-container {
+  background-color: #25375c;
+  border-radius: 12px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 380px;
+  margin: 0 auto;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
   
   @media (max-width: 599px) {
-    max-width: 90% !important;
-    margin: 1rem auto !important;
-    padding: 1.25rem !important;
-  }
-  
-  @media (min-width: 1200px) {
-    max-width: 450px !important;
-    padding: 2rem !important;
+    padding: 1.5rem;
+    width: 90%;
   }
 }
 
-.signup-title, .mat-mdc-card-title {
-  font-family: var(--font-family-sci-fi) !important;
-  color: var(--light-color-primary) !important;
-  text-align: center !important;
-  margin-bottom: 1.75rem !important;
-  font-size: 1.8rem !important;
-  letter-spacing: 1px !important;
+.signup-title {
+  font-family: var(--font-family-sci-fi);
+  color: var(--light-color-primary);
+  text-align: center;
+  margin-bottom: 1.75rem;
+  font-size: 1.8rem;
+  letter-spacing: 1px;
   
   @media (max-width: 599px) {
-    font-size: 1.5rem !important;
-    margin-bottom: 1.25rem !important;
+    font-size: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+}
+
+.form-field-container {
+  margin-bottom: 1.25rem;
+}
+
+.form-field {
+  width: 100%;
+}
+
+// Force dark backgrounds for input fields
+::ng-deep {
+  .mat-mdc-text-field-wrapper {
+    background-color: rgba(30, 41, 59, 0.8) !important;
+    overflow: hidden !important;
   }
   
-  @media (min-width: 1200px) {
-    font-size: 2rem !important;
-    margin-bottom: 2rem !important;
+  .mat-mdc-form-field-flex {
+    background-color: transparent !important;
   }
-}
-
-.form-field, .mat-mdc-form-field {
-  width: 100% !important;
-  margin-bottom: 1.25rem !important;
-  display: block !important;
-}
-
-.birthdate-field {
-  ::ng-deep {
-    input[type="date"] {
-      appearance: none !important;
-      -webkit-appearance: none !important;
-      padding: 0.5rem 0 !important;
-      color: white !important;
-      
-      &::-webkit-calendar-picker-indicator {
-        filter: invert(1) !important;
-        opacity: 0.7 !important;
-        cursor: pointer !important;
-        margin-right: 0.5rem !important;
-      }
+  
+  .mdc-text-field--outlined {
+    overflow: hidden !important;
+  }
+  
+  input.mat-mdc-input-element {
+    background-color: rgba(30, 41, 59, 0.8) !important;
+  }
+  
+  // Date picker styles
+  input[type="date"] {
+    color: white !important;
+    
+    &::-webkit-calendar-picker-indicator {
+      filter: invert(1) !important;
+      opacity: 0.7 !important;
     }
   }
 }
 
-.signup-action-buttons, form button {
-  display: flex !important;
-  justify-content: center !important;
-  margin-top: 2rem !important;
-  margin-bottom: 1rem !important;
+.signup-action-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  
+  button {
+    min-width: 140px;
+    
+    @media (max-width: 599px) {
+      width: 100%;
+    }
+  }
 }
 
-/* Spinner styles */
 .spinner {
-  margin: 0 auto !important;
-  
-  ::ng-deep circle {
-    stroke: white !important;
-  }
+  margin: 0 auto;
 }
